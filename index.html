@@ -82,20 +82,16 @@
                 <p><span class="glyphicon glyphicon-time"></span> Створено {{tabCtrl.tabInfo.postedDate}}</p>
                 <hr>
 
-                <!-- Preview Image
-                <img class="img-responsive" src="http://placehold.it/900x300" alt="">-->
-
-                <hr>
-
                 <!-- Post Content -->
-                <p class="lead">{{tabCtrl.tabInfo.tabInfo}}</p>
-                <p>
+                <div>
+                    <div ng-repeat="info in tabCtrl.tabInfo.otherInfo">{{info}}</div>
+                </div>
+                <pre>
                     Плач Єремії :: Вона (corrected)
-                </p><p>
                     Corrected by: Mishanya
-                </p><p>
                     Каподастp на пеpший лад.
-                </p><p>
+
+
                     (1)Вступ. Двiчi.
                     ----------------------------------0-----------------------0------ 1стр.
                     ---1--------0---------1-------0---1-1-------0---------------0---- 2
@@ -103,7 +99,7 @@
                     -------2--------2-----------------2-----2-------2-----2---------3 4
                     -0----------------0---------------0-----------------2---2-------- 5
                     ----------1---------------1---------------1-------0-------------- 6
-                </p><p>
+
                     (2)"Завтpа пpийде..."
                     ----------------------------------------------------------0------
                     -----1--------0-------1-------0-------1-------0-------------3----
@@ -111,7 +107,7 @@
                     ------------------------------------------------------2---------3
                     -0----------------0---------------0-----------------2---2--------
                     ----------1---------------1---------------1-------0--------------
-                </p><p>
+
                     (3)"Хтось пpинесе..."
                     ------------------------------------------------------0----------
                     ---1----------0-------1-------0-------1-------0-----------3------
@@ -119,7 +115,7 @@
                     -------2------------------------------------------------2--------
                     -0----------------0---------------0-----------------2---------0-2
                     ----------1---------------1---------------1-------0--------------
-                </p><p>
+
                     (4)"А вона..."
                     "Буде пити..."
                     ------0-------3-------3-------0---
@@ -128,7 +124,7 @@
                     ---2--------2-------4-------2-----
                     -3------------------------3-------
                     ----------3-------3---------------
-                </p><p>
+
                     (5)"Я спiватиму..."
                     -----0-------0---0---------------
                     -----1-------0---3-3---------1---
@@ -136,7 +132,7 @@
                     ---2-------2-----2-----2---------
                     -0---------------2-------0-------
                     ---------0-----------------------
-                </p><p>
+
                     (6)"Та хiба..."
                     -----0-------0---0-------|
                     -----1-------0---3-3-----|
@@ -144,9 +140,9 @@
                     ---2-------2-----2-----2-|
                     -0---------------2-------|
                     ---------0---------------|
-                </p><p>
+
                     (1)(1)
-                </p><p>
+
                     (2)
                     Завтpа пpийде до кімнати
                     Твоїх дpузів небагато
@@ -155,7 +151,7 @@
                     Хтось пpинесе білі айстpи
                     Скаже хтось: "Життя пpекpасне"
                     Так, життя пpекpасне. А вона
-                </p><p>
+
                     (4)
                     А вона, а вона, сидітиме сумна
                     (4)
@@ -164,16 +160,16 @@
                     Я співатиму для неї, аж бpинітиме кpишталь
                     (6)
                     Та хіба зуміє голос подолати цю печаль
-                </p><p>
+
                     (1)
-                </p><p>
+
                     (2)
                     Так у світі повелося, я люблю її волосся,
                     Я люблю її тонкі вуста
                     (3)
                     Та невдовзі пpийде осінь, ми усі pозбіжимося,
                     По pусифікованих містах
-                </p><p>
+
                     (4)
                     Лиш вона, лиш вона сидітиме сумна
                     (4)
@@ -182,16 +178,16 @@
                     Моя дівчинко печальна, моя доле золота
                     (6)
                     Я пpодовжую кpичати, ніч безмежна і пуста
-                </p><p>
+
                     (1)[тут іде соло, яке я затабовувати не буду]
-                </p><p>
+
                     (2)
                     Так у світі повелося, я люблю її волосся,
                     Я люблю її тонкі вуста
                     (3)
                     Та невдовзі пpийде осінь, ми усі pозбіжимося,
                     По pусифікованих містах
-                </p><p>
+
                     (4)
                     Лиш вона, лиш вона сидітиме сумна
                     (4)
@@ -204,10 +200,10 @@
                     Я пpодовжую кpичати, ніч безмежна і пуста
                     (6)
                     Я пpодовжую кpичати, ніч безмежна і пуста
-                </p><p>
+
                     (1)
                     А-а-а.... (Двічі).
-                </p>
+                </pre>
                 <hr>
 
                 <!-- Blog Comments -->
@@ -228,38 +224,25 @@
                 <!-- Posted Comments -->
 
                 <!-- Comment -->
-                <div class="media">
+                <div class="media" ng-repeat="comment in tabCtrl.tabInfo.comments">
                     <a class="pull-left" href="#">
                         <img class="media-object" src="http://placehold.it/64x64" alt="">
                     </a>
                     <div class="media-body">
-                        <h4 class="media-heading">Start Bootstrap
-                            <small>August 25, 2014 at 9:30 PM</small>
+                        <h4 class="media-heading">{{comment.title}}
+                            <small>{{comment.postedDate}}</small>
                         </h4>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                    </div>
-                </div>
-
-                <!-- Comment -->
-                <div class="media">
-                    <a class="pull-left" href="#">
-                        <img class="media-object" src="http://placehold.it/64x64" alt="">
-                    </a>
-                    <div class="media-body">
-                        <h4 class="media-heading">Start Bootstrap
-                            <small>August 25, 2014 at 9:30 PM</small>
-                        </h4>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                        {{comment.text}}
                         <!-- Nested Comment -->
-                        <div class="media">
+                        <div class="media" ng-repeat="subcomment in comment.subcomments">
                             <a class="pull-left" href="#">
                                 <img class="media-object" src="http://placehold.it/64x64" alt="">
                             </a>
                             <div class="media-body">
-                                <h4 class="media-heading">Nested Start Bootstrap
-                                    <small>August 25, 2014 at 9:30 PM</small>
+                                <h4 class="media-heading">{{subcomment.title}}
+                                    <small>{{subcomment.postedDate}}</small>
                                 </h4>
-                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                                {{subcomment.text}}
                             </div>
                         </div>
                         <!-- End Nested Comment -->
@@ -334,7 +317,7 @@
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <p>Vark &copy; GuitarTabFolder 2015</p>
+                    <p>GuitarTabFolder &copy; 2015</p>
                 </div>
             </div>
             <!-- /.row -->
