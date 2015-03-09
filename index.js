@@ -14,7 +14,7 @@ http.createServer(function(request, response) {
 
 
 function fileReader(pathname, response) {
-    var filePath = "." + (pathname != "/" ? pathname : "/index.html");
+    var filePath = "./public" + (pathname != "/" ? pathname : "/index.html");
     console.log("looking for file: " + filePath);
     fs.readFile(filePath, function (err, html) {
         if (err) {
