@@ -69,13 +69,13 @@
 </nav>
 
 <!-- Page Content -->
-<div class="container" ng-app="tabPage">
+<div class="container">
 
 <div class="row">
 
 <!-- Blog Post Content Column -->
-<div class="col-lg-8">
-    <table class="row-border hover table">
+<div class="col-lg-8" ng-app="listPage">
+    <table class="row-border hover table" ng-controller="TabListController as listCtrl">
         <thead>
         <tr>
             <th>Група</th>
@@ -85,7 +85,7 @@
         </thead>
         <tbody>
         <tr>
-            <td>Плач Єремії</td>
+            <td><a href="tabPage.html">Плач Єремії</a></td>
             <td>Вона</td>
             <td>07.03.2015</td>
         </tr>
