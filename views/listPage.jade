@@ -8,16 +8,9 @@ block content
                 th Назва пісні
                 th Дата
         tbody
-            tr
-                td
-                    a(href='tabPage.html') Плач Єремії
-                td Вона
-                td 07.03.2015
-            tr
-                td Band
-                td Song Name
-                td 01.01.2015
-            tr
-                td Band
-                td Song Name
-                td 01.01.2015
+            each tab in tabsData
+                tr
+                    td= tab.band
+                    td
+                        a(href='/tab/vona')= tab.title
+                    td= tab.postedDate
