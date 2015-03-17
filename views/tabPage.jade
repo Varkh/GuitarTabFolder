@@ -1,0 +1,21 @@
+extends ./layout.jade
+
+block content
+    h1= tabData.title
+    p.lead
+        | Виконавець:
+        a(href='#')= tabData.band
+    hr
+    p
+        span.glyphicon.glyphicon-time
+        | Створено
+        =tabData.postedDate
+    hr
+    //content
+    div
+        each info in tabData.otherInfo
+            div= info
+    each line in tabData.body
+        div= line
+    hr
+    include ./comments.jade

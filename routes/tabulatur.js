@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET list page. */
+var tabData = require("./../data");
+
 router.get('/', function(request, response, next) {
-    //res.render('index', { title: 'Express' });
-    response.redirect(301, './pages/tabPage.html');
+    response.render('tabPage', { tabData: tabData['vona'] });
 });
 
 module.exports = router;

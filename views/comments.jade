@@ -1,0 +1,36 @@
+// mixin
+mixin comment(comment)
+    .media
+        a.pull-left(href='#')
+            img.media-object(src='http://placehold.it/64x64', alt='')
+        .media-body
+            h4.media-heading= comment.title
+                small= comment.postedDate
+            = comment.text
+            // Nested Comment
+            each subcomment in comment.subcomments
+                +subcoment(subcomment)
+
+
+mixin subcoment(subcomment)
+    .media
+        a.pull-left(href='#')
+            img.media-object(src='http://placehold.it/64x64', alt='')
+        .media-body
+            h4.media-heading= subcomment.title
+                small= subcomment.postedDate
+            =subcomment.text
+
+
+// Comments Form
+.well
+    h4 Leave a Comment:
+    form(role='form')
+        .form-group
+            textarea.form-control(rows='3')
+        button.btn.btn-primary(type='submit') Submit
+hr
+// Posted Comments
+// Comment
+each comment in tabData.comments
+    +comment(comment)
