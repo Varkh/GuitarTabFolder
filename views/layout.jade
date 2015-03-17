@@ -1,7 +1,13 @@
 doctype html
 html
-  head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-  body
-    block content
+    include  ./includes/head.jade
+    body
+        include ./includes/navigation.jade
+        .container
+            .row
+                .col-lg-8
+                    block content
+                .col-md-4
+                    include ./includes/sidebar.jade
+            hr
+            include ./includes/footer.jade
