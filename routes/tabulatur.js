@@ -18,4 +18,21 @@ router.route('/:name')
         }
     });
 
+router.post('/', function(request, response, next) {
+    var newTab = request.body;
+    var tabId = newTab.title.split(' ').join('_');
+
+    //add new tab
+    //TODO rewrite
+    tabData[tabId] = {
+        title: newTab.title,
+        postedDate: new Date(),
+        band: newTab.band,
+        otherInfo: newTab.info.split('\n'),
+        body: newTab.body.split('\n')
+    };
+
+    response.status(201).render('tabPage', { tabData: tabData[tabId] });
+});
+
 module.exports = router;

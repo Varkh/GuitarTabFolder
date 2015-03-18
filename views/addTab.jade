@@ -1,0 +1,18 @@
+extends ./layout.jade
+
+block content
+    h2 Add new tab
+    form(role="form", action="/tab" method="POST")
+        div.form-group
+            label(for="name") Name:
+            input.form-control#title(type="text", name="title", placeholder="Name")
+        div.form-group
+            label(for="name") Band:
+            input.form-control#band(type="text", name="band", placeholder="Band")
+        div.form-group
+            label(for="body") Addition info:
+            textarea.form-control#info(name="info", placeholder="Some notes about tab")
+        div.form-group
+            label(for="body") Tab body:
+            textarea.form-control#body(name="body", placeholder="Put your tab here")
+        button.btn.btn-lg.btn-primary(type="submit") Save

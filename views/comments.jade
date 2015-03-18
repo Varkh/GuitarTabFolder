@@ -32,5 +32,6 @@ mixin subcoment(subcomment)
 hr
 // Posted Comments
 // Comment
-each comment in tabData.comments
-    +comment(comment)
+if(tabData.comments)
+    each comment in tabData.comments
+        +comment(comment)

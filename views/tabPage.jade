@@ -13,9 +13,11 @@ block content
     hr
     //content
     div
-        each info in tabData.otherInfo
-            div= info
-    each line in tabData.body
-        div= line
+        if(tabData.otherInfo)
+            each info in tabData.otherInfo
+                div= info
+    div#tabBody
+        each line in tabData.body
+            div= line
     hr
     include ./comments.jade
