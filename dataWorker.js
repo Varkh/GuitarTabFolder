@@ -8,6 +8,21 @@ function getTabs() {
     return tabData;
 }
 
+function getLastTabNames() {
+    //TODO get last tabs
+    var tabList = tabData;
+    var result = [];
+    for (var tab in tabList) {
+        if (tabList.hasOwnProperty(tab)) {
+            result.push({
+                tabId: tabList[tab].tabId,
+                title: tabList[tab].title
+            });
+        }
+    }
+    return result;
+}
+
 function addTab(tabId, title, postedDate, band, otherInfo, body) {
     tabData[tabId] = {
         tabId: tabId,
@@ -36,3 +51,4 @@ exports.getTab = getTab;
 exports.getTabs = getTabs;
 exports.addTab = addTab;
 exports.addComment = addComment;
+exports.getLastTabNames = getLastTabNames;
