@@ -34,6 +34,25 @@ function addTab(tabId, title, postedDate, band, otherInfo, body) {
     };
 }
 
+function searchForTab(query) {
+    //search by id and title
+    var q = query.toLowerCase();
+    var tabById = getTab(q);
+    if(tabById) {
+        return tabById.tabId;
+    } else {
+        //TODO fix title in UTF-8
+        for (var tab in tabData) {
+            if (tabData.hasOwnProperty(tab)) {
+                if (tabData[tab].title == q) {
+                    return tabData[tab].tabId;
+                }
+            }
+        }
+        return null;
+    }
+}
+
 function addComment(tabId, author, date, text) {
     var comment = {
         title: author,
@@ -52,3 +71,4 @@ exports.getTabs = getTabs;
 exports.addTab = addTab;
 exports.addComment = addComment;
 exports.getLastTabNames = getLastTabNames;
+exports.searchForTab = searchForTab;

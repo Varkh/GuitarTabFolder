@@ -1,3 +1,7 @@
+textarea {
+    resize: vertical;
+}
+
 #tabBody {
     font-family: monospace;
 }

@@ -20,7 +20,7 @@ router.route('/:name')
 
 router.post('/', function(request, response, next) {
     var newTab = request.body;
-    var tabId = newTab.title.split(' ').join('_');
+    var tabId = newTab.title.split(' ').join('_').toLowerCase();
 
     dataWorker.addTab(
         tabId,

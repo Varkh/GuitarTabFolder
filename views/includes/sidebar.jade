@@ -1,11 +1,11 @@
 div(ng-app='sideBar')
     // Blog Search Well
-    .well
+    .well(ng-controller='searchController')
         h4 Пошук табів
         .input-group
-            input.form-control(type='text')
+            input.form-control(type='text', ng-model='searchField')
             span.input-group-btn
-                button.btn.btn-default(type='button')
+                button.btn.btn-default(type='button', ng-click='search()')
                     span.glyphicon.glyphicon-search
     // Blog Categories Well
     .well(ng-controller='lastTabController')
