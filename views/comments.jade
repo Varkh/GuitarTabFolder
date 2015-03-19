@@ -8,8 +8,9 @@ mixin comment(comment)
                 small= comment.postedDate
             = comment.text
             // Nested Comment
-            each subcomment in comment.subcomments
-                +subcoment(subcomment)
+            if(comment.subcomments)
+                each subcomment in comment.subcomments
+                    +subcoment(subcomment)
 
 
 mixin subcoment(subcomment)
@@ -25,9 +26,9 @@ mixin subcoment(subcomment)
 // Comments Form
 .well
     h4 Leave a Comment:
-    form(role='form')
+    form(role='form', action= tabData.tabId + '/comment', method='POST')
         .form-group
-            textarea.form-control(rows='3')
+            textarea.form-control(name='text', rows='3')
         button.btn.btn-primary(type='submit') Submit
 hr
 // Posted Comments

@@ -25,6 +25,7 @@ router.post('/', function(request, response, next) {
     //add new tab
     //TODO rewrite
     tabData[tabId] = {
+        tabId: tabId,
         title: newTab.title,
         postedDate: new Date(),
         band: newTab.band,
@@ -33,6 +34,19 @@ router.post('/', function(request, response, next) {
     };
 
     response.status(201).render('tabPage', { tabData: tabData[tabId] });
+});
+
+router.post('/:name/comment', function(request, response, next) {
+    var tabId = request.params.name.toLowerCase()
+    var newComment = request.body;
+    var comment = {
+        title: "Author",
+        postedDate: new Date(),
+        text: newComment.text
+    };
+    tabData[tabId].comments.push(comment);
+
+    response.redirect(301, "/tab/"+tabId);
 });
 
 module.exports = router;

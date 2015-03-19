@@ -1,5 +1,6 @@
 module.exports = {
     vona: {
+        tabId: 'vona',
         title: "Вона",
         band: "Плач Єремії",
         postedDate: "August 24, 2013 at 9:00 PM",
