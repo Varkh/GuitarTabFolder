@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var dataWorker = require('../dataWorker');
+var dataWorker = require('../modules/dataWorker');
 
 /* GET home page. */
 router.get('/', function(request, response) {

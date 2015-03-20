@@ -1,4 +1,18 @@
-var tabData = require("./data");
+var fs = require('fs');
+
+var tabData;
+var fileURL = './data.json';
+function loadDataFile() {
+    tabData = JSON.parse(fs.readFileSync(fileURL, 'utf8'));
+    console.log(tabData);
+}
+
+function saveDataFile() {
+    fs.writeFile(fileURL, JSON.stringify(tabData), function (err) {
+        if (err) throw err;
+        console.log('It\'s saved!');
+    });
+}
 
 function getTab(tabId) {
     return tabData[tabId];
@@ -32,6 +46,7 @@ function addTab(tabId, title, postedDate, band, otherInfo, body) {
         otherInfo: otherInfo,
         body: body
     };
+    saveDataFile();
 }
 
 function searchForTab(query) {
@@ -64,7 +79,10 @@ function addComment(tabId, author, date, text) {
     } else {
         tabData[tabId].comments = [comment];
     }
+    saveDataFile();
 }
+
+loadDataFile();
 
 exports.getTab = getTab;
 exports.getTabs = getTabs;

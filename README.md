@@ -6,3 +6,4 @@ Created using:
 - NodeJS
 - Express
 - Bootstrap
+- AngularJS

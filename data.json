@@ -1,17 +1,17 @@
-module.exports = {
-    vona: {
-        tabId: 'vona',
-        title: "Вона",
-        band: "Плач Єремії",
-        postedDate: "August 24, 2013 at 9:00 PM",
-        otherInfo: [
+{
+    "vona": {
+        "tabId": "vona",
+        "title": "Вона",
+        "band": "Плач Єремії",
+        "postedDate": "August 24, 2013 at 9:00 PM",
+        "otherInfo": [
             "(Завтра прийде до кімнати)",
             "Cлова: Кость Москалець",
             "Музика: Кость Москалець",
             "Обробка слів, переклад: Mishanya solo version",
             "найкращий підбір"
         ],
-        body: ["Плач Єремії :: Вона (corrected)",
+        "body": ["Плач Єремії :: Вона (corrected)",
             "Corrected by: Mishanya",
             "Каподастp на пеpший лад.",
             "",
@@ -127,6 +127,6 @@ module.exports = {
             "",
             "(1)",
             "А-а-а.... (Двічі)."],
-        comments: []
+        "comments": []
     }
-};
+}
