@@ -15,7 +15,12 @@ router.get('/lastTabs', function(request, response) {
 });
 
 router.get('/search', function(request, response) {
-    response.json(dataWorker.searchForTab(request.query.queryString));
+    var result  = dataWorker.searchForTab(request.query.queryString);
+    if(result) {
+        response.json({url: '/tab/' + result});
+    } else {
+        response.json("");
+    }
 });
 
 module.exports = router;

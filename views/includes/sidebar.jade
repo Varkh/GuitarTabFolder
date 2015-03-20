@@ -3,10 +3,11 @@ div(ng-app='sideBar')
     .well(ng-controller='searchController')
         h4 Пошук табів
         .input-group
-            input.form-control(type='text', ng-model='searchField')
+            input.form-control(type='text', ng-model='searchField', ng-keypress="searchKeyPress($event)")
             span.input-group-btn
                 button.btn.btn-default(type='button', ng-click='search()')
                     span.glyphicon.glyphicon-search
+        div.alert.alert-danger(role='alert', ng-show='showAlert') Nothing found
     // Blog Categories Well
     .well(ng-controller='lastTabController')
         h4 10 останніх табів
