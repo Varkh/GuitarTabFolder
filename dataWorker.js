@@ -41,10 +41,10 @@ function searchForTab(query) {
     if(tabById) {
         return tabById.tabId;
     } else {
-        //TODO fix title in UTF-8
         for (var tab in tabData) {
             if (tabData.hasOwnProperty(tab)) {
-                if (tabData[tab].title == q) {
+                console.log(tabData[tab].title.toLowerCase() + ' == ' +q);
+                if (tabData[tab].title.toLowerCase() == q) {
                     return tabData[tab].tabId;
                 }
             }

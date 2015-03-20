@@ -1,0 +1,40 @@
+{
+    "title": "Guitar Tab Folder",
+
+    "headTitle": "GuitarTabFolder",
+    "navCreate": "Строворити",
+    "navFolder": "Папка",
+    "navAbout": "Про сайт",
+
+    "searchTitle": "Пошук табів",
+    "searchNothingFound": "Нічого не знайдено",
+    "lastTabsWidgetTitle": "10 останніх табів",
+    "textWidgetTitle": "Корисна інформація",
+    "textWidgetText": "Знаходиться на стадії розробки",
+
+    "addTabPage": {
+        "titleField": "Додати нову табулатуру",
+        "nameField": "Назва:",
+        "nameHolder": "назва",
+        "bandField": "Гурт:",
+        "bandHolder": "назва гурту",
+        "addInfoField": "Додаткова інформація:",
+        "addInfoHolder": "ішна інформація",
+        "tabBodyField": "Табулатура:",
+        "tabBodyHolder": "табулатуру сюди",
+        "saveButtonText": "Зберегти"
+    },
+    "listPage": {
+        "bandColumn": "Група",
+        "nameColumn": "Назва пісні",
+        "dateColumn": "Дата"
+    },
+    "tabPage": {
+        "bandTitle": "Виконавець:",
+        "createDate": "Створено: "
+    },
+    "comment": {
+        "leaveComment": "Залишити коментар:",
+        "submit": "Надіслати"
+    }
+}

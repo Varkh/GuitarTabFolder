@@ -1,18 +1,18 @@
 extends ./layout.jade
 
 block content
-    h2 Add new tab
+    h2= pageText.addTabPage.titleField
     form(role="form", action="/tab" method="POST")
         div.form-group
-            label(for="name") Name:
-            input.form-control#title(type="text", name="title", placeholder="Name")
+            label(for="name")= pageText.addTabPage.nameField
+            input.form-control#title(type="text", name="title", placeholder= pageText.addTabPage.nameHolder)
         div.form-group
-            label(for="name") Band:
-            input.form-control#band(type="text", name="band", placeholder="Band")
+            label(for="name")= pageText.addTabPage.bandField
+            input.form-control#band(type="text", name="band", placeholder= pageText.addTabPage.bandHolder)
         div.form-group
-            label(for="body") Addition info:
-            textarea.form-control#info(name="info", placeholder="Some notes about tab")
+            label(for="body")= pageText.addTabPage.addInfoField
+            textarea.form-control#info(name="info", placeholder= pageText.addTabPage.addInfoHolder)
         div.form-group
-            label(for="body") Tab body:
-            textarea.form-control#body(name="body", placeholder="Put your tab here")
-        button.btn.btn-lg.btn-primary(type="submit") Save
+            label(for="body")= pageText.addTabPage.tabBodyField
+            textarea.form-control#body(name="body", placeholder= pageText.addTabPage.tabBodyHolder)
+        button.btn.btn-lg.btn-primary(type="submit")= pageText.addTabPage.saveButtonText

@@ -3,12 +3,12 @@ extends ./layout.jade
 block content
     h1= tabData.title
     p.lead
-        | Виконавець:
+        = pageText.tabPage.dateColumn
         a(href='#')= tabData.band
     hr
     p
         span.glyphicon.glyphicon-time
-        | Створено:
+        = pageText.tabPage.createDate
         =tabData.postedDate
     hr
     //content

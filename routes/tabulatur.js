@@ -3,6 +3,7 @@ var router = express.Router();
 
 var dataWorker = require('../dataWorker');
 var helper = require('../helper');
+var renderer = require('../modules/renderer');
 
 router.route('/:name')
     .all(function(request, response, next) {
@@ -14,7 +15,7 @@ router.route('/:name')
         if(!data) {
             response.status(404).json("not found");
         } else {
-            response.render('tabPage', { tabData: data });
+            renderer.renderTabPage(response, data);
         }
     });
 
@@ -35,7 +36,7 @@ router.post('/', function(request, response, next) {
 });
 
 router.post('/:name/comment', function(request, response, next) {
-    var tabId = request.params.name.toLowerCase()
+    var tabId = request.params.name.toLowerCase();
     var newComment = request.body;
     dataWorker.addComment(
         tabId,

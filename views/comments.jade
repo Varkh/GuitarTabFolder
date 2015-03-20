@@ -25,11 +25,11 @@ mixin subcoment(subcomment)
 
 // Comments Form
 .well
-    h4 Leave a Comment:
+    h4= pageText.comment.leaveComment
     form(role='form', action= tabData.tabId + '/comment', method='POST')
         .form-group
             textarea.form-control(name='text', rows='3')
-        button.btn.btn-primary(type='submit') Submit
+        button.btn.btn-primary(type='submit')= pageText.comment.submit
 hr
 // Posted Comments
 // Comment

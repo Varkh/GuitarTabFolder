@@ -3,17 +3,18 @@ nav.navbar.navbar-default.navbar-custom.navbar-fixed-top
         // Brand and toggle get grouped for better mobile display
         .navbar-header.page-scroll
             button.navbar-toggle(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
+                //TODO not working, no angular
                 span.sr-only Toggle navigation
                 span.icon-bar
                 span.icon-bar
                 span.icon-bar
-            a.navbar-brand(href='/') GuitarTabFolder
+            a.navbar-brand(href='/')= pageText.headTitle
         // Collect the nav links, forms, and other content for toggling
         #bs-example-navbar-collapse-1.collapse.navbar-collapse
             ul.nav.navbar-nav.navbar-right
                 li
-                    a(href='/newtab') Строворити
+                    a(href='/newtab')= pageText.navCreate
                 li
-                    a(href='/list') Папка
+                    a(href='/list')= pageText.navFolder
                 li
-                    a(href='/pages/about.html') Про сайт
+                    a(href='/pages/about.html')= pageText.navAbout
