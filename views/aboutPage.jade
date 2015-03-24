@@ -1,0 +1,23 @@
+doctype html
+html(ng-app='sideBar')
+    include  ./includes/head.jade
+    body
+        include ./includes/navigation.jade
+        // Page Header
+        header.intro-header(style="background-image: url('/img/guitar.jpg')")
+            .container
+                .row
+                    .col-lg-8.col-lg-offset-2.col-md-10.col-md-offset-1
+                        .page-heading
+                            h1 About
+                            hr.small
+                            span.subheading Some good quote here
+        .container
+            .row
+                .col-lg-8.col-lg-offset-2.col-md-10.col-md-offset-1
+                    p Some good info should be here...
+                    .row.control-group
+                        .col-xs-12.controls
+                            | Thanks
+
+        include ./includes/footer.jade

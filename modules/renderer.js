@@ -19,9 +19,14 @@ function renderListPage(response, data) {
     response.render('listPage', { tabsData: data, pageText: pageText  });
 }
 
+function renderAboutPage(response) {
+    response.render('aboutPage', { pageText: pageText });
+}
+
 initRenderer();
 
 exports.initRenderer = initRenderer;
 exports.renderTabPage = renderTabPage;
 exports.renderAddTabPage = renderAddTabPage;
 exports.renderListPage = renderListPage;
+exports.renderAboutPage = renderAboutPage;

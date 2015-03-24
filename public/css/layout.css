@@ -2,10 +2,26 @@ textarea {
     resize: vertical;
 }
 
+body {
+    padding-top: 70px;
+}
+
+footer {
+    margin: 50px 0;
+}
+
 .tabContainer {
     font-family: monospace;
 }
 
 .tab-line {
     white-space: pre-wrap;
+}
+
+.intro-header {
+    background-size: cover;
+    height: 500px;
+    text-align: center;
+    vertical-align: middle;
+    color: #ffffff;
 }

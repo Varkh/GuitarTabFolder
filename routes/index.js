@@ -2,12 +2,18 @@ var express = require('express');
 var router = express.Router();
 
 var dataWorker = require('../modules/dataWorker');
+var renderer = require('../modules/renderer');
 
 /* GET home page. */
 router.get('/', function(request, response) {
-    response.redirect(301, './pages/about.html');
+    response.redirect(301, './about');
 });
 
+/* GET pages*/
+
+router.get('/about', function(request, response) {
+    renderer.renderAboutPage(response);
+});
 
 /* API */
 router.get('/lastTabs', function(request, response) {
