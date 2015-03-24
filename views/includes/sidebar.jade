@@ -1,3 +1,9 @@
+mixin listTabColumn(isEven)
+    .col-lg-6
+        ul.list-unstyled
+            li(ng-repeat='tab in lastTabs', ng-if= isEven ? '$even' : '$odd')
+                a(href='/tab/{{tab.tabId}}') {{tab.title}}
+
 div(ng-app='sideBar')
     // Blog Search Well
     .well(ng-controller='searchController')
@@ -12,14 +18,8 @@ div(ng-app='sideBar')
     .well(ng-controller='lastTabController')
         h4= pageText.lastTabsWidgetTitle
         .row
-            .col-lg-6
-                ul.list-unstyled
-                    li(ng-repeat='tab in lastTabs', ng-if="$even")
-                        a(href='#') {{tab.title}}
-            .col-lg-6
-                ul.list-unstyled
-                    li(ng-repeat='tab in lastTabs', ng-if="$odd")
-                        a(href='#') {{tab.title}}
+            +listTabColumn(true)
+            +listTabColumn(false)
     .well
         h4= pageText.textWidgetTitle
         p

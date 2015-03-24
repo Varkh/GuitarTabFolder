@@ -2,6 +2,10 @@ textarea {
     resize: vertical;
 }
 
-#tabBody {
+.tabContainer {
     font-family: monospace;
+}
+
+.tab-line {
+    white-space: pre-wrap;
 }

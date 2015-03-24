@@ -16,8 +16,8 @@ block content
         if(tabData.otherInfo)
             each info in tabData.otherInfo
                 div= info
-    div#tabBody
+    div.tabContainer
         each line in tabData.body
-            div= line
+            div.tab-line= line
     hr
     include ./comments.jade

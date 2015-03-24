@@ -4,7 +4,6 @@ var tabData;
 var fileURL = './data.json';
 function loadDataFile() {
     tabData = JSON.parse(fs.readFileSync(fileURL, 'utf8'));
-    console.log(tabData);
 }
 
 function saveDataFile() {
