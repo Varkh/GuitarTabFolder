@@ -14,6 +14,7 @@
 
     "addTabPage": {
         "titleField": "Додати нову табулатуру",
+        "titleFieldForEdit": "Редагування",
         "nameField": "Назва:",
         "nameHolder": "назва",
         "bandField": "Гурт:",
@@ -36,5 +37,9 @@
     "comment": {
         "leaveComment": "Залишити коментар:",
         "submit": "Надіслати"
+    },
+
+    "errorMessages": {
+        "text404": "На жаль такої сторінки не існує"
     }
 }

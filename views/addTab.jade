@@ -1,18 +1,26 @@
 extends ./layout.jade
 
 block content
-    h2= pageText.addTabPage.titleField
-    form(role="form", action="/tab" method="POST")
-        div.form-group
-            label(for="name")= pageText.addTabPage.nameField
-            input.form-control#title(type="text", name="title", placeholder= pageText.addTabPage.nameHolder)
-        div.form-group
-            label(for="name")= pageText.addTabPage.bandField
-            input.form-control#band(type="text", name="band", placeholder= pageText.addTabPage.bandHolder)
-        div.form-group
-            label(for="body")= pageText.addTabPage.addInfoField
-            textarea.form-control#info(name="info", placeholder= pageText.addTabPage.addInfoHolder)
-        div.form-group
-            label(for="body")= pageText.addTabPage.tabBodyField
-            textarea.form-control.tabContainer#body(name="body", placeholder= pageText.addTabPage.tabBodyHolder)
-        button.btn.btn-lg.btn-primary(type="submit")= pageText.addTabPage.saveButtonText
+    div(ng-controller="TabFormController")
+        if tabData
+            script
+                != 'var tabDataClient = ' + JSON.stringify(tabData) + ';'
+            h2= pageText.addTabPage.titleFieldForEdit
+        else
+            h2= pageText.addTabPage.titleField
+        form(role="form", ng-submit="submitTabForm()")
+            div.form-group
+                label(for="nameInput")= pageText.addTabPage.nameField
+                input.form-control#nameInput(type="text", placeholder= pageText.addTabPage.nameHolder, ng-model="tab.title")
+            div.form-group
+                label(for="bandInput")= pageText.addTabPage.bandField
+                input.form-control#bandInput(type="text", placeholder= pageText.addTabPage.bandHolder, ng-model="tab.band")
+            div.form-group
+                label(for="infoInput")= pageText.addTabPage.addInfoField
+                textarea.form-control#infoInput(placeholder= pageText.addTabPage.addInfoHolder, ng-model="tab.info")
+            div.form-group
+                label(for="bodyInput")= pageText.addTabPage.tabBodyField
+                textarea.form-control.tabContainer#bodyInput(placeholder= pageText.addTabPage.tabBodyHolder, ng-model="tab.body")
+            button.btn.btn-lg.btn-success(type="submit")
+                span.glyphicon.glyphicon-floppy-disk
+                = pageText.addTabPage.saveButtonText

@@ -10,6 +10,9 @@ block content
         span.glyphicon.glyphicon-time
         = pageText.tabPage.createDate
         =tabData.postedDate
+        a.btn.btn-primary.pull-right(href='/tab/' + tabData.tabId + '/edit')
+            span.glyphicon.glyphicon-pencil
+            | Edit
     hr
     //content
     div
