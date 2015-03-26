@@ -5,6 +5,7 @@
     "navCreate": "Строворити",
     "navFolder": "Папка",
     "navAbout": "Про сайт",
+    "navFeedback": "Відгук",
 
     "searchTitle": "Пошук табів",
     "searchNothingFound": "Нічого не знайдено",
@@ -37,6 +38,18 @@
     "comment": {
         "leaveComment": "Залишити коментар:",
         "submit": "Надіслати"
+    },
+
+    "feedbackPage": {
+        "title": "Форма зворотнього зв’язку",
+        "successMsg": "Ваш відгук успішно надіслано. Дякуємо.",
+        "nameField": "Ім’я:",
+        "nameHolder": "Можете представитись",
+        "emailField": "E-mail:",
+        "emailHolder": "Якщо бажаєте отримати відповідь",
+        "messageField": "",
+        "messageHolder": "Відгук пишіть тут",
+        "sendButtonText": "Надіслати"
     },
 
     "errorMessages": {

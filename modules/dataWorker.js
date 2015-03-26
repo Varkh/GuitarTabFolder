@@ -3,7 +3,8 @@ var fs = require('fs');
 var tabData;
 var fileURL = './data.json';
 function loadDataFile() {
-    tabData = JSON.parse(fs.readFileSync(fileURL, 'utf8'));
+    var data = JSON.parse(fs.readFileSync(fileURL, 'utf8'));
+    tabData = data.tabs;
 }
 
 function saveDataFile() {
@@ -81,6 +82,14 @@ function addComment(tabId, author, date, text) {
     saveDataFile();
 }
 
+function addFeedback(text, name, email) {
+    var feedback = {text: text};
+    if(name) feedback.name = name;
+    if(email) feedback.email = email;
+    //TODO save
+    console.log(feedback);
+}
+
 loadDataFile();
 
 exports.getTab = getTab;
@@ -89,3 +98,4 @@ exports.addTab = addTab;
 exports.addComment = addComment;
 exports.getLastTabNames = getLastTabNames;
 exports.searchForTab = searchForTab;
+exports.addFeedback = addFeedback;

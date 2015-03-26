@@ -64,3 +64,22 @@ sideBar.controller('TabFormController', function ($scope, $http, $window) {
         }
     }
 });
+
+sideBar.controller('FeedbackFormController', function ($scope, $http) {
+    $scope.isSubmited = false;
+    $scope.feedbackMsg = {};
+
+    $scope.submitFeedBackForm = function() {
+        $http.post('/feedback', $scope.feedbackMsg)
+            .success(function(data, status, headers, config) {
+                if(status == 200) {
+                    $scope.isSubmited = true;
+                } else {
+                    alert("Something goes wrong");
+                }
+            })
+            .error(function(data, status, headers, config) {
+                alert(data);
+            });
+    };
+});

@@ -10,6 +10,7 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var tabList = require('./routes/tabList');
 var tabulatur = require('./routes/tabulatur');
+var feedback = require('./routes/feedback');
 
 // - modules
 var renderer = require('./modules/renderer');
@@ -31,6 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/list', tabList);
 app.use('/tab', tabulatur);
+app.use('/feedback', feedback);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

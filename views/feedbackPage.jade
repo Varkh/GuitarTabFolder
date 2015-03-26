@@ -1,0 +1,23 @@
+extends ./layout.jade
+
+block content
+    div(ng-controller="FeedbackFormController")
+        h2= pageText.feedbackPage.title
+        hr
+        alert(type="success", ng-show="isSubmited")
+            span.glyphicon.glyphicon-ok
+            = pageText.feedbackPage.successMsg
+        form(role="form", ng-submit="submitFeedBackForm()", ng-hide="isSubmited")
+            div.form-group
+                label(for="nameInput")= pageText.feedbackPage.nameField
+                input.form-control#nameInput(type="text", placeholder= pageText.feedbackPage.nameHolder, ng-model="feedbackMsg.name")
+            div.form-group
+                label(for="emailInput")= pageText.feedbackPage.emailField
+                input.form-control#emailInput(type="text", placeholder= pageText.feedbackPage.emailHolder, ng-model="feedbackMsg.email")
+            hr
+            div.form-group
+                label(for="textInput")= pageText.feedbackPage.messageField
+                textarea.form-control.tabContainer#textInput(placeholder= pageText.feedbackPage.messageHolder, ng-model="feedbackMsg.text")
+            button.btn.btn-lg.btn-success(type="submit")
+                span.glyphicon.glyphicon-send
+                = pageText.feedbackPage.sendButtonText

@@ -27,6 +27,10 @@ function renderAboutPage(response) {
     response.render('aboutPage', { pageText: pageText });
 }
 
+function renderFeedBackPage(response) {
+    response.render('feedbackPage', { pageText: pageText  });
+}
+
 function renderer404Page(response, error) {
     response.render('error', {
         message: '404 ' + pageText.errorMessages.text404,
@@ -57,5 +61,6 @@ exports.renderAddTabPage = renderAddTabPage;
 exports.renderEditTabPage = renderEditTabPage;
 exports.renderListPage = renderListPage;
 exports.renderAboutPage = renderAboutPage;
+exports.renderFeedBackPage = renderFeedBackPage;
 exports.renderer404Page = renderer404Page;
 exports.renderErrorPage = renderErrorPage;
