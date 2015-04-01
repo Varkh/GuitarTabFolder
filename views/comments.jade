@@ -1,12 +1,19 @@
 // mixin
+mixin space
+    &nbsp
+
+mixin commentBody(comment)
+    h4.media-heading= comment.title
+        +space
+        small= comment.postedDate
+    = comment.text
+
 mixin comment(comment)
     .media
         a.pull-left(href='#')
             img.media-object(src='http://placehold.it/64x64', alt='')
         .media-body
-            h4.media-heading= comment.title
-                small= comment.postedDate
-            = comment.text
+            +commentBody(comment)
             // Nested Comment
             if(comment.subcomments)
                 each subcomment in comment.subcomments
@@ -18,9 +25,7 @@ mixin subcoment(subcomment)
         a.pull-left(href='#')
             img.media-object(src='http://placehold.it/64x64', alt='')
         .media-body
-            h4.media-heading= subcomment.title
-                small= subcomment.postedDate
-            =subcomment.text
+            +commentBody(subcomment)
 
 
 // Comments Form

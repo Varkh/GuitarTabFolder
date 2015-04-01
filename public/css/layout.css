@@ -25,3 +25,7 @@ footer {
     vertical-align: middle;
     color: #ffffff;
 }
+
+.ng-invalid.ng-dirty {
+    border-color: #ff4843;
+}

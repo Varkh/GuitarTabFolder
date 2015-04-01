@@ -1,6 +1,11 @@
 //TODO rename or restuct module
 var sideBar = angular.module('sideBar', ['ui.bootstrap']);
 
+function showExeption(data) {
+    //TODO
+    alert("Something goes wrong");
+}
+
 sideBar.controller('lastTabController', function ($scope, $http) {
     $http.get('/lastTabs')
         .success(function(data) {
@@ -44,13 +49,11 @@ sideBar.controller('TabFormController', function ($scope, $http, $window) {
             if (data && data.url) {
                 $window.location.href = data.url;
             } else {
-                //TODO
-                alert("Something goes wrong");
+                showExeption();
             }
         };
         var errorResponse = function(data, status, headers, config) {
-            //TODO
-            alert("Something goes wrong");
+            showExeption();
         };
 
         if(isEdit) {
@@ -75,11 +78,11 @@ sideBar.controller('FeedbackFormController', function ($scope, $http) {
                 if(status == 200) {
                     $scope.isSubmited = true;
                 } else {
-                    alert("Something goes wrong");
+                    showExeption();
                 }
             })
             .error(function(data, status, headers, config) {
-                alert(data);
+                showExeption(data);
             });
     };
 });

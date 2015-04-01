@@ -8,19 +8,19 @@ block content
             h2= pageText.addTabPage.titleFieldForEdit
         else
             h2= pageText.addTabPage.titleField
-        form(role="form", ng-submit="submitTabForm()")
+        form(name="tabForm" role="form", ng-submit="tabForm.$valid && submitTabForm()" novalidate)
             div.form-group
                 label(for="nameInput")= pageText.addTabPage.nameField
-                input.form-control#nameInput(type="text", placeholder= pageText.addTabPage.nameHolder, ng-model="tab.title")
+                input.form-control#nameInput(type="text", placeholder= pageText.addTabPage.nameHolder, ng-model="tab.title" required)
             div.form-group
                 label(for="bandInput")= pageText.addTabPage.bandField
-                input.form-control#bandInput(type="text", placeholder= pageText.addTabPage.bandHolder, ng-model="tab.band")
+                input.form-control#bandInput(type="text", placeholder= pageText.addTabPage.bandHolder, ng-model="tab.band" required)
             div.form-group
                 label(for="infoInput")= pageText.addTabPage.addInfoField
                 textarea.form-control#infoInput(placeholder= pageText.addTabPage.addInfoHolder, ng-model="tab.info")
             div.form-group
                 label(for="bodyInput")= pageText.addTabPage.tabBodyField
-                textarea.form-control.tabContainer#bodyInput(placeholder= pageText.addTabPage.tabBodyHolder, ng-model="tab.body")
+                textarea.form-control.tabContainer#bodyInput(placeholder= pageText.addTabPage.tabBodyHolder, ng-model="tab.body" required)
             button.btn.btn-lg.btn-success(type="submit")
                 span.glyphicon.glyphicon-floppy-disk
                 = pageText.addTabPage.saveButtonText

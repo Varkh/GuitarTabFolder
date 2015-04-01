@@ -7,17 +7,17 @@ block content
         alert(type="success", ng-show="isSubmited")
             span.glyphicon.glyphicon-ok
             = pageText.feedbackPage.successMsg
-        form(role="form", ng-submit="submitFeedBackForm()", ng-hide="isSubmited")
+        form(name="feedbackForm" role="form", ng-submit="feedbackForm.$valid && submitFeedBackForm()", ng-hide="isSubmited" novalidate)
             div.form-group
                 label(for="nameInput")= pageText.feedbackPage.nameField
                 input.form-control#nameInput(type="text", placeholder= pageText.feedbackPage.nameHolder, ng-model="feedbackMsg.name")
             div.form-group
                 label(for="emailInput")= pageText.feedbackPage.emailField
-                input.form-control#emailInput(type="text", placeholder= pageText.feedbackPage.emailHolder, ng-model="feedbackMsg.email")
+                input.form-control#emailInput(type="email", placeholder= pageText.feedbackPage.emailHolder, ng-model="feedbackMsg.email")
             hr
             div.form-group
                 label(for="textInput")= pageText.feedbackPage.messageField
-                textarea.form-control.tabContainer#textInput(placeholder= pageText.feedbackPage.messageHolder, ng-model="feedbackMsg.text")
+                textarea.form-control.tabContainer#textInput(placeholder= pageText.feedbackPage.messageHolder, ng-model="feedbackMsg.text" required)
             button.btn.btn-lg.btn-success(type="submit")
                 span.glyphicon.glyphicon-send
                 = pageText.feedbackPage.sendButtonText
