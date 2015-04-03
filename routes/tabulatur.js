@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var dataWorker = require('../modules/dataWorker');
+var tabRequestHandler = require('../handlers/tabRequestHandler');
 var helper = require('../helper');
 var renderer = require('../modules/renderer');
 
@@ -11,14 +11,20 @@ router.param('name', function(request, response, next) {
 });
 
 router.get('/:name', function(request, response, next) {
-    var data = dataWorker.getTab(request.tabName);
-    if(!data) {
-        var err = new Error('');
-        err.status = 404;
-        next(err);
-    } else {
-        renderer.renderTabPage(response, data);
-    }
+    tabRequestHandler.getTab(request.tabName, function (err, tab) {
+        if(err) {
+            next(err);
+            return;
+        }
+        if(tab) {
+            renderer.renderTabPage(response, tab);
+        } else {
+            var err404 = new Error('');
+            err404.status = 404;
+            next(err404);
+        }
+    });
+
 });
 
 router.get('/', function(request, response) {
@@ -26,66 +32,67 @@ router.get('/', function(request, response) {
 });
 
 router.get('/:name/edit', function(request, response, next) {
-    var data = dataWorker.getTab(request.tabName);
-    if(!data) {
-        var err = new Error('');
-        err.status = 404;
-        next(err);
-    } else {
-        var dataToSend = {
-            tabId: data.tabId,
-            title: data.title,
-            band: data.band,
-            info: data.otherInfo.join('\n'),
-            body: data.body.join('\n')
-        };
-        renderer.renderEditTabPage(response, dataToSend);
-    }
+    tabRequestHandler.getTab(request.tabName, function (err, tab) {
+        if(err) {
+            next(err);
+            return;
+        }
+        if(!tab) {
+            var err404 = new Error('');
+            err404.status = 404;
+            next(err404);
+        } else {
+            var dataToSend = {
+                tabId: tab.tabId,
+                title: tab.title,
+                band: tab.band,
+                info: tab.otherInfo.join('\n'),
+                body: tab.body.join('\n')
+            };
+            renderer.renderEditTabPage(response, dataToSend);
+        }
+    });
 });
 
 /* API */
 router.post('/', function(request, response, next) {
-    var newTab = request.body;
-    var tabId = newTab.title.split(' ').join('_').toLowerCase();
-
-    dataWorker.addTab(
-        tabId,
-        newTab.title,
-        helper.getCurentFormatedDate(),
-        newTab.band,
-        newTab.info.split('\n'),
-        newTab.body.split('\n')
-    );
-    response.json({url: '/tab/' + tabId});
+    tabRequestHandler.addTab(request.body, function (err, tab) {
+        if(err) {
+            next(err);
+            return;
+        }
+        console.log("Created new tab: " + tab.tabId);
+        response.json({url: '/tab/' + tab.tabId});
+    });
 });
 
 router.put('/:name/', function(request, response, next) {
-    //TODO change to real edit
-    var newTab = request.body;
-    var tabId = newTab.title.split(' ').join('_').toLowerCase();
-
-    dataWorker.addTab(
-        tabId,
-        newTab.title,
-        helper.getCurentFormatedDate(),
-        newTab.band,
-        newTab.info.split('\n'),
-        newTab.body.split('\n')
-    );
-    response.json({url: '/tab/' + tabId});
+    tabRequestHandler.editTab(request.tabName, request.body, function (err, tab) {
+        if(err) {
+            next(err);
+            return;
+        }
+        response.json({url: '/tab/' + tab.tabId});
+    });
 });
 
 
 router.post('/:name/comment', function(request, response, next) {
     var tabId = request.params.name.toLowerCase();
     var newComment = request.body;
-    dataWorker.addComment(
+    tabRequestHandler.addComment(
         tabId,
         "Author",
         helper.getCurentFormatedDate(),
-        newComment.text
+        newComment.text,
+        function (err, tab) {
+            if(err) {
+                next(err);
+                return;
+            }
+            response.redirect(301, "/tab/"+tabId);
+        }
     );
-    response.redirect(301, "/tab/"+tabId);
 });
 
 module.exports = router;

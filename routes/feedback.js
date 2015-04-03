@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var dataWorker = require('../modules/dataWorker');
+var indexRequestHandler = require('../handlers/indexRequestHandler');
 var renderer = require('../modules/renderer');
 
 router.get('/', function(request, response) {
@@ -10,12 +10,19 @@ router.get('/', function(request, response) {
 
 router.post('/', function(request, response) {
     var newFeedback = request.body;
-    dataWorker.addFeedback(
+    indexRequestHandler.addFeedback(
         newFeedback.text,
         (newFeedback.name) ? newFeedback.name : null,
-        (newFeedback.email) ? newFeedback.email : null
+        (newFeedback.email) ? newFeedback.email : null,
+        function (err, tab) {
+            if(err) {
+                next(err);
+                return;
+            }
+            console.log("feedback added");
+            response.sendStatus(200);
+        }
     );
-    response.sendStatus(200);
 });
 
 module.exports = router;
