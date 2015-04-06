@@ -3,7 +3,8 @@
 Inspired by idea of having all by guitar tabs online.
 
 Created using:
+- MongoDB
 - NodeJS
 - Express
-- Bootstrap
 - AngularJS
+- Bootstrap
