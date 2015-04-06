@@ -3,6 +3,7 @@ var router = express.Router();
 
 var indexRequestHandler = require('../handlers/indexRequestHandler');
 var renderer = require('../modules/renderer');
+var logger = require('../modules/logger');
 
 router.get('/', function(request, response) {
     renderer.renderFeedBackPage(response);
@@ -19,7 +20,7 @@ router.post('/', function(request, response) {
                 next(err);
                 return;
             }
-            console.log("feedback added");
+            logger.debug("New feedback added");
             response.sendStatus(200);
         }
     );

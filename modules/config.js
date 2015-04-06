@@ -1,3 +1,4 @@
+//TODO read from file
 var fs = require('fs');
 
 var configFileURL = '../config.json';
@@ -6,7 +7,17 @@ var data = function() {
 };
 
 function getDbUrl() {
-    return 'mongodb://localhost/test';//TODO read from file
+    return 'mongodb://localhost/test';
+}
+
+function getLogLevel() {
+    return 'DEBUG';
+}
+
+function getLogFilePath() {
+    return './log.txt';
 }
 
 exports.getDbUrl = getDbUrl;
+exports.getLogLevel = getLogLevel;
+exports.getLogFilePath = getLogFilePath;

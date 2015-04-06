@@ -2,8 +2,9 @@ var express = require('express');
 var router = express.Router();
 
 var tabRequestHandler = require('../handlers/tabRequestHandler');
-var helper = require('../helper');
+var helper = require('../modules/helper');
 var renderer = require('../modules/renderer');
+var logger = require('../modules/logger');
 
 router.param('name', function(request, response, next) {
     request.tabName = request.params.name.toLowerCase();
@@ -61,7 +62,7 @@ router.post('/', function(request, response, next) {
             next(err);
             return;
         }
-        console.log("Created new tab: " + tab.tabId);
+        logger.debug("New tab created: " + tab.tabId);
         response.json({url: '/tab/' + tab.tabId});
     });
 });

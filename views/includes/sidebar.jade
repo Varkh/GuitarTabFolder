@@ -4,7 +4,7 @@ mixin listTabColumn(isEven)
             li(ng-repeat='tab in lastTabs', ng-if= isEven ? '$even' : '$odd')
                 a(href='/tab/{{tab.tabId}}') {{tab.title}}
 
-div(ng-app='sideBar')
+div
     // Blog Search Well
     .well(ng-controller='searchController')
         h4= pageText.searchTitle

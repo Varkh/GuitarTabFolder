@@ -2,7 +2,7 @@
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
-var logger = require('morgan');
+var requestLogger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
@@ -14,6 +14,7 @@ var feedback = require('./routes/feedback');
 
 // - modules
 var renderer = require('./modules/renderer');
+var logger = require('./modules/logger');
 
 var app = express();
 
@@ -21,9 +22,8 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(__dirname + '/public/favicon.ico'));
-app.use(logger('dev'));
+app.use(favicon(__dirname + '/public/favicon.ico'));
+app.use(requestLogger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -47,6 +47,7 @@ app.use(function(req, res, next) {
 // will print stacktrace
 if (app.get('env') === 'development') {
     app.use(function(error, request, response, next) {
+        logger.error(error);
         renderer.renderErrorPage(response, error);
     });
 }
@@ -54,6 +55,7 @@ if (app.get('env') === 'development') {
 // production error handler
 // no stacktraces leaked to user
 app.use(function(error, request, response, next) {
+    logger.error(error);
     renderer.renderErrorPage(response, error);
 });
 

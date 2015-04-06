@@ -1,12 +1,11 @@
-//TODO rename or restuct module
-var sideBar = angular.module('sideBar', ['ui.bootstrap']);
+var tabApplication = angular.module('tabApplication', ['ui.bootstrap']);
 
 function showExeption(data) {
     //TODO
     alert("Something goes wrong");
 }
 
-sideBar.controller('lastTabController', function ($scope, $http) {
+tabApplication.controller('lastTabController', function ($scope, $http) {
     $http.get('/lastTabs')
         .success(function(data) {
             $scope.lastTabs = data;
@@ -16,7 +15,7 @@ sideBar.controller('lastTabController', function ($scope, $http) {
         });
 });
 
-sideBar.controller('searchController', function ($scope, $http, $window) {
+tabApplication.controller('searchController', function ($scope, $http, $window) {
     $scope.showAlert = false;
     $scope.searchField = "";
     $scope.search = function() {
@@ -38,7 +37,7 @@ sideBar.controller('searchController', function ($scope, $http, $window) {
     }
 });
 
-sideBar.controller('TabFormController', function ($scope, $http, $window) {
+tabApplication.controller('TabFormController', function ($scope, $http, $window) {
     var isEdit = typeof tabDataClient != 'undefined';
     if(isEdit) {
         $scope.tab = tabDataClient;
@@ -68,7 +67,7 @@ sideBar.controller('TabFormController', function ($scope, $http, $window) {
     }
 });
 
-sideBar.controller('FeedbackFormController', function ($scope, $http) {
+tabApplication.controller('FeedbackFormController', function ($scope, $http) {
     $scope.isSubmited = false;
     $scope.feedbackMsg = {};
 

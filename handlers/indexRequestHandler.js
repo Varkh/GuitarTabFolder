@@ -2,10 +2,11 @@ var dbWorker = require('../modules/dbWorker');
 
 var Tab = dbWorker.getTabModel();
 var Feedback = dbWorker.getFeedbackModel();
+var logger = require('../modules/logger');
 
 function searchForTab(query, callback) {
     var q = query.toLowerCase();
-    console.log(q);
+    logger.debug('Search for: ' + q);
     Tab.find({
         $or:[
             {tabId: q},

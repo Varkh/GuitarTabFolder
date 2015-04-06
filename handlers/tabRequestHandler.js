@@ -1,5 +1,5 @@
 var dbWorker = require('../modules/dbWorker');
-var helper = require('../helper');
+var helper = require('../modules/helper');
 
 var Tab = dbWorker.getTabModel();
 var Comment = dbWorker.getCommentModel();

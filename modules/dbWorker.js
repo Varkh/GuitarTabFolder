@@ -1,13 +1,14 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var config = require('../modules/config');
+var logger = require('../modules/logger');
 
-mongoose.connect('mongodb://localhost/test');
+mongoose.connect(config.getDbUrl());
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function (callback) {
-    console.log("connected to db");
+    logger.info("Connected to DB on " + config.getDbUrl());
 });
 
 var tabSchema = mongoose.Schema({
