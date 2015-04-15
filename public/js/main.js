@@ -1,11 +1,10 @@
-var tabApplication = angular.module('tabApplication', ['ui.bootstrap']);
-
 function showExeption(data) {
     //TODO
     alert("Something goes wrong");
 }
 
-tabApplication.controller('lastTabController', function ($scope, $http) {
+angular.module('tabApplication', ['ui.bootstrap'])
+.controller('lastTabController', function ($scope, $http) {
     $http.get('/lastTabs')
         .success(function(data) {
             $scope.lastTabs = data;
@@ -13,9 +12,8 @@ tabApplication.controller('lastTabController', function ($scope, $http) {
         .error(function(data) {
             console.log('Error: ' + data);
         });
-});
-
-tabApplication.controller('searchController', function ($scope, $http, $window) {
+})
+.controller('searchController', function ($scope, $http, $window) {
     $scope.showAlert = false;
     $scope.searchField = "";
     $scope.search = function() {
@@ -35,9 +33,8 @@ tabApplication.controller('searchController', function ($scope, $http, $window) 
         if (keyEvent.which === 13)
             $scope.search();
     }
-});
-
-tabApplication.controller('TabFormController', function ($scope, $http, $window) {
+})
+.controller('TabFormController', function ($scope, $http, $window) {
     var isEdit = typeof tabDataClient != 'undefined';
     if(isEdit) {
         $scope.tab = tabDataClient;
@@ -65,9 +62,8 @@ tabApplication.controller('TabFormController', function ($scope, $http, $window)
                 .error(errorResponse);
         }
     }
-});
-
-tabApplication.controller('FeedbackFormController', function ($scope, $http) {
+})
+.controller('FeedbackFormController', function ($scope, $http) {
     $scope.isSubmited = false;
     $scope.feedbackMsg = {};
 
@@ -84,4 +80,22 @@ tabApplication.controller('FeedbackFormController', function ($scope, $http) {
                 showExeption(data);
             });
     };
-});
+})
+.controller('LoginFormController', function ($scope, $http) {
+        $scope.isLogined = false;
+        $scope.loginData = {};
+
+        $scope.submitLoginForm = function() {
+            $http.post('/login', $scope.loginData)
+                .success(function(data, status, headers, config) {
+                    if(status == 200) {
+                        $scope.isLogined = true;
+                    } else {
+                        showExeption(data);
+                    }
+                })
+                .error(function(data, status, headers, config) {
+                    showExeption(data);
+                });
+        };
+    });

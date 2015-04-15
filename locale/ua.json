@@ -6,6 +6,7 @@
     "navFolder": "Папка",
     "navAbout": "Про сайт",
     "navFeedback": "Відгук",
+    "navLogin": "Вхід",
 
     "searchTitle": "Пошук табів",
     "searchNothingFound": "Нічого не знайдено",
@@ -50,6 +51,17 @@
         "messageField": "",
         "messageHolder": "Відгук пишіть тут",
         "sendButtonText": "Надіслати"
+    },
+
+    "loginPage": {
+        "title": "Вхід в систему",
+        "successMsg": "Ви успішно ввійшли",
+        "wrongInfoMsg": "Логін, або пароль невірний",
+        "loginField": "Логін:",
+        "loginHolder": "логін",
+        "passwordField": "Пароль:",
+        "passwordHolder": "пароль",
+        "loginButtonText": "Увійти"
     },
 
     "errorMessages": {

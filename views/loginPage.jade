@@ -1,0 +1,20 @@
+extends ./layout.jade
+
+block content
+    div(ng-controller="LoginFormController")
+        h2= pageText.loginPage.title
+        hr
+        alert(type="success", ng-show="isLogined")
+            span.glyphicon.glyphicon-ok
+            = pageText.loginPage.successMsg
+        form(name="loginForm" role="form", ng-submit="loginForm.$valid && submitLoginForm()", ng-hide="isSubmited" novalidate)
+            div.form-group
+                label(for="loginInput")= pageText.loginPage.loginField
+                input.form-control#loginInput(type="text", placeholder= pageText.loginPage.loginHolder, ng-model="loginData.login")
+            div.form-group
+                label(for="passInput")= pageText.loginPage.passwordField
+                input.form-control#passInput(type="password", placeholder= pageText.loginPage.passwordHolder, ng-model="loginData.pass")
+            hr
+            button.btn.btn-lg.btn-primary(type="submit")
+                span.glyphicon.glyphicon-user
+                = pageText.loginPage.loginButtonText

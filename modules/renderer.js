@@ -31,6 +31,10 @@ function renderFeedBackPage(response) {
     response.render('feedbackPage', { pageText: pageText  });
 }
 
+function renderLoginPage(response) {
+    response.render('loginPage', { pageText: pageText  });
+}
+
 function renderer404Page(response, error) {
     response.render('error', {
         message: '404 ' + pageText.errorMessages.text404,
@@ -62,5 +66,6 @@ exports.renderEditTabPage = renderEditTabPage;
 exports.renderListPage = renderListPage;
 exports.renderAboutPage = renderAboutPage;
 exports.renderFeedBackPage = renderFeedBackPage;
+exports.renderLoginPage = renderLoginPage;
 exports.renderer404Page = renderer404Page;
 exports.renderErrorPage = renderErrorPage;

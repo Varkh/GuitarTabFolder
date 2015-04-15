@@ -18,6 +18,11 @@ function getLogFilePath() {
     return './log.txt';
 }
 
+function getSessionSecret() {
+    return 'secret';
+}
+
 exports.getDbUrl = getDbUrl;
 exports.getLogLevel = getLogLevel;
 exports.getLogFilePath = getLogFilePath;
+exports.getSessionSecret = getSessionSecret;
