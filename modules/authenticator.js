@@ -38,18 +38,33 @@ var publicMethods = {
         //TODO remove init
 //        this.addNewUser({
 //            username: "admin",
-//            email: "",
+//            email: "test@mail.com",
 //            password: "Welcome!"
 //        });
     },
 
     addNewUser: function(userData) {
-            var newUser = new User({
-                username: userData.username,
-                email: userData.email,
-                password: helper.getHash(userData.password)
-            });
-            newUser.save();
+        var newUser = new User({
+            username: userData.username,
+            email: userData.email,
+            password: helper.getHash(userData.password)
+        });
+        newUser.save();
+    },
+
+    isLoggedIn: function (request, response, next) {
+        if (request.isAuthenticated())
+            return next();
+        logger.debug("Access denied, redirect");
+        return response.status(401).json('Unauthorized');
+    },
+
+    isOwner: function (request, response, next) {
+        //TODO check isOwner
+        if (request.isAuthenticated())
+            return next();
+        logger.debug("Access denied, redirect");
+        return response.status(401).json('Unauthorized');
     }
 };
 

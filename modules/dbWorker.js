@@ -19,24 +19,62 @@ var tabSchema = mongoose.Schema({
         type: String,
         unique: true
     },
-    title: String,
-    postedDate: Date,
+    title: {
+        type: String,
+        required: true
+    },
+    _author: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
+    postedDate: {
+        type: Date,
+        required: true
+    },
     band: String,
     otherInfo: [String],
-    body: [String]
+    body: {
+        type: [String],
+        required: true
+    }
 });
 
 var commentSchema = mongoose.Schema({
-    _tab: {type: Schema.Types.ObjectId, ref: 'Tab'},
-    author: String,
-    postedDate: Date,
-    text: String
+    _tab: {
+        type: Schema.Types.ObjectId,
+        ref: 'Tab',
+        required: true
+    },
+    _author: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
+    postedDate: {
+        type: Date,
+        required: true
+    },
+    text: {
+        type: String,
+        required: true
+    }
 });
 
 var userSchema = mongoose.Schema({
-    username: String,
-    email: String,
-    password: String
+    username: {
+        type: String,
+        unique: true,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true
+    }
 });
 
 userSchema.methods.validPassword = function validPassword (password) {
@@ -44,7 +82,10 @@ userSchema.methods.validPassword = function validPassword (password) {
 };
 
 var feedbackSchema = mongoose.Schema({
-    text: String,
+    text: {
+        type: String,
+        required: true
+    },
     name: String,
     email: String
 });
@@ -54,23 +95,19 @@ var Comment = mongoose.model('Comment', commentSchema);
 var User = mongoose.model('User', userSchema);
 var Feedback = mongoose.model('Feedback', feedbackSchema);
 
-function getTabModel() {
-    return Tab;
-}
+var publicMethods = {
+    getTabModel: function() {
+        return Tab;
+    },
+    getCommentModel: function() {
+        return Comment;
+    },
+    getUserModel: function() {
+        return User;
+    },
+    getFeedbackModel: function() {
+        return Feedback;
+    }
+};
 
-function getCommentModel() {
-    return Comment;
-}
-
-function getUserModel() {
-    return User;
-}
-
-function getFeedbackModel() {
-    return Feedback;
-}
-
-exports.getTabModel = getTabModel;
-exports.getCommentModel = getCommentModel;
-exports.getUserModel = getUserModel;
-exports.getFeedbackModel = getFeedbackModel;
+module.exports = publicMethods;

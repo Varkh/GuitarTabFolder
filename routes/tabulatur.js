@@ -5,6 +5,7 @@ var tabRequestHandler = require('../handlers/tabRequestHandler');
 var helper = require('../modules/helper');
 var renderer = require('../modules/renderer');
 var logger = require('../modules/logger');
+var authenticator = require('../modules/authenticator');
 
 router.param('name', function(request, response, next) {
     request.tabName = request.params.name.toLowerCase();
@@ -28,7 +29,7 @@ router.get('/:name', function(request, response, next) {
 
 });
 
-router.get('/', function(request, response) {
+router.get('/', authenticator.isLoggedIn, function(request, response) {
     renderer.renderAddTabPage(request, response);
 });
 
@@ -56,8 +57,10 @@ router.get('/:name/edit', function(request, response, next) {
 });
 
 /* API */
-router.post('/', function(request, response, next) {
-    tabRequestHandler.addTab(request.body, function (err, tab) {
+router.post('/', authenticator.isLoggedIn, function(request, response, next) {
+    var tabData = request.body;
+    tabData.username = request.user.username;
+    tabRequestHandler.addTab(tabData, function (err, tab) {
         if(err) {
             next(err);
             return;
@@ -67,7 +70,7 @@ router.post('/', function(request, response, next) {
     });
 });
 
-router.put('/:name/', function(request, response, next) {
+router.put('/:name/', authenticator.isOwner, function(request, response, next) {
     tabRequestHandler.editTab(request.tabName, request.body, function (err, tab) {
         if(err) {
             next(err);
@@ -78,12 +81,12 @@ router.put('/:name/', function(request, response, next) {
 });
 
 
-router.post('/:name/comment', function(request, response, next) {
+router.post('/:name/comment', authenticator.isLoggedIn, function(request, response, next) {
     var tabId = request.params.name.toLowerCase();
     var newComment = request.body;
     tabRequestHandler.addComment(
         tabId,
-        "Author",
+        request.user.username,
         helper.getCurentFormatedDate(),
         newComment.text,
         function (err, tab) {

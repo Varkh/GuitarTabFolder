@@ -13,7 +13,7 @@ router.post('/', function(request, response, next) {
     passport.authenticate('local', function(err, user, info) {
         if (err) { return next(err); }
         if (!user) {
-            return response.status(401).json("Wrong!");
+            return response.status(401).json({message: "Wrong!"});
         }
         request.logIn(user, function(err) {
             if (err) { return next(err); }

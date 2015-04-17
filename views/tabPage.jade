@@ -1,5 +1,8 @@
 extends ./layout.jade
 
+mixin space
+    |&nbsp
+
 block content
     h1= tabData.title
     p.lead
@@ -9,10 +12,15 @@ block content
     p
         span.glyphicon.glyphicon-time
         = pageText.tabPage.createDate
-        =tabData.postedDate
+        +space
+        = tabData.postedDate
         a.btn.btn-primary.pull-right(href='/tab/' + tabData.tabId + '/edit')
             span.glyphicon.glyphicon-pencil
             | Edit
+    p
+        = pageText.tabPage.author
+        +space
+        = tabData._author.username
     hr
     //content
     div

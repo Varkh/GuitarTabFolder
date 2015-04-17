@@ -35,11 +35,13 @@
     },
     "tabPage": {
         "bandTitle": "Виконавець:",
-        "createDate": "Створено: "
+        "createDate": "Створено:",
+        "author": "Автор:"
     },
     "comment": {
         "leaveComment": "Залишити коментар:",
-        "submit": "Надіслати"
+        "submit": "Надіслати",
+        "notAuthorizedMsg": "Щоб залишити коментар, будь-ласка, увійдіть."
     },
 
     "feedbackPage": {

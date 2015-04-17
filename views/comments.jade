@@ -31,10 +31,15 @@ mixin subcoment(subcomment)
 // Comments Form
 .well
     h4= pageText.comment.leaveComment
-    form(role='form', action= tabData.tabId + '/comment', method='POST')
-        .form-group
-            textarea.form-control(name='text', rows='3')
-        button.btn.btn-primary(type='submit')= pageText.comment.submit
+    - if(username)
+        form(role='form', action= tabData.tabId + '/comment', method='POST')
+            .form-group
+                textarea.form-control(name='text', rows='3')
+            button.btn.btn-primary(type='submit')= pageText.comment.submit
+    - else
+        = pageText.comment.notAuthorizedMsg
+        +space
+        a(href='/login')= pageText.navLogin
 hr
 // Posted Comments
 // Comment

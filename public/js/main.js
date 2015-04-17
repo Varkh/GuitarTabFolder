@@ -45,11 +45,11 @@ angular.module('tabApplication', ['ui.bootstrap'])
             if (data && data.url) {
                 $window.location.href = data.url;
             } else {
-                showExeption();
+                showExeption(data);
             }
         };
         var errorResponse = function(data, status, headers, config) {
-            showExeption();
+            showExeption(data);
         };
 
         if(isEdit) {
@@ -84,18 +84,28 @@ angular.module('tabApplication', ['ui.bootstrap'])
 .controller('LoginFormController', function ($scope, $http) {
         $scope.isLogined = false;
         $scope.loginData = {};
+        $scope.failureLoginMessage = null;
 
         $scope.submitLoginForm = function() {
+            $scope.failureLoginMessage = null;
             $http.post('/login', $scope.loginData)
                 .success(function(data, status, headers, config) {
                     if(status == 200) {
                         $scope.isLogined = true;
                     } else {
-                        showExeption(data);
+                        if(data.message) {
+                            $scope.failureLoginMessage = data.message;
+                        } else {
+                            showExeption(data);
+                        }
                     }
                 })
                 .error(function(data, status, headers, config) {
-                    showExeption(data);
+                    if(data.message) {
+                        $scope.failureLoginMessage = data.message;
+                    } else {
+                        showExeption(data);
+                    }
                 });
         };
     });
