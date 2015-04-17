@@ -19,5 +19,11 @@ nav.navbar.navbar-default.navbar-custom.navbar-fixed-top
                     a(href='/about')= pageText.navAbout
                 li
                     a(href='/feedback')= pageText.navFeedback
-                li
-                    a(href='/login')= pageText.navLogin
+                - if(username)
+                    li
+                        a(href='#')= username
+                    li
+                        a(href='/logout')= pageText.navLogout
+                - else
+                    li
+                        a(href='/login')= pageText.navLogin

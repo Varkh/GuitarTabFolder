@@ -3,69 +3,75 @@ var jade = require('jade');
 
 var pageText;
 
-function initRenderer() {
-    pageText = JSON.parse(fs.readFileSync('./locale/ua.json', 'utf8'));
-}
-
-function renderTabPage(response, data) {
-    response.render('tabPage', { tabData: data, pageText: pageText });
-}
-
-function renderAddTabPage(response) {
-    response.render('addTab', { pageText: pageText });
-}
-
-function renderEditTabPage(response, data) {
-    response.render('addTab', { tabData: data, pageText: pageText });
-}
-
-function renderListPage(response, data) {
-    response.render('listPage', { tabsData: data, pageText: pageText  });
-}
-
-function renderAboutPage(response) {
-    response.render('aboutPage', { pageText: pageText });
-}
-
-function renderFeedBackPage(response) {
-    response.render('feedbackPage', { pageText: pageText  });
-}
-
-function renderLoginPage(response) {
-    response.render('loginPage', { pageText: pageText  });
-}
-
-function renderer404Page(response, error) {
-    response.render('error', {
-        message: '404 ' + pageText.errorMessages.text404,
-        error: {},
-        pageText: pageText
-    });
-}
-
-function renderErrorPage(response, error) {
-    if(error.status == 404) {
-        renderer404Page(response, error);
-        return;
+function getPageCommonData(request) {
+    var data = { pageText: pageText };
+    if(request && request.isAuthenticated()) {
+        data.username = request.user.username
     }
-
-    response.status(error.status || 500);
-    response.render('error', {
-        message: error.message,
-        error: error,
-        pageText: pageText
-    });
+    return data;
 }
 
-initRenderer();
+var publicMethods = {
+    initRenderer: function() {
+        pageText = JSON.parse(fs.readFileSync('./locale/ua.json', 'utf8'));
+    },
 
-exports.initRenderer = initRenderer;
-exports.renderTabPage = renderTabPage;
-exports.renderAddTabPage = renderAddTabPage;
-exports.renderEditTabPage = renderEditTabPage;
-exports.renderListPage = renderListPage;
-exports.renderAboutPage = renderAboutPage;
-exports.renderFeedBackPage = renderFeedBackPage;
-exports.renderLoginPage = renderLoginPage;
-exports.renderer404Page = renderer404Page;
-exports.renderErrorPage = renderErrorPage;
+    renderTabPage: function(request, response, data) {
+        var pageData = getPageCommonData(request);
+        pageData.tabData = data;
+        response.render('tabPage', pageData);
+    },
+
+    renderAddTabPage: function(request, response) {
+        response.render('addTab', getPageCommonData(request));
+    },
+
+    renderEditTabPage: function(request, response, data) {
+        var pageData = getPageCommonData(request);
+        pageData.tabData = data;
+        response.render('addTab', pageData);
+    },
+
+    renderListPage: function(request, response, data) {
+        var pageData = getPageCommonData(request);
+        pageData.tabsData = data;
+        response.render('listPage', pageData);
+    },
+
+    renderAboutPage: function(request, response) {
+        response.render('aboutPage', getPageCommonData(request));
+    },
+
+    renderFeedBackPage: function(request, response) {
+        response.render('feedbackPage', getPageCommonData(request));
+    },
+
+    renderLoginPage: function(request, response) {
+        response.render('loginPage', getPageCommonData(request));
+    },
+
+    renderer404Page: function(request, response, error) {
+        var pageData = getPageCommonData(request);
+        pageData.message = '404 ' + pageText.errorMessages.text404;
+        pageData.error = {};
+        response.render('error', pageData);
+    },
+
+    renderErrorPage: function(request, response, error) {
+        if(error.status == 404) {
+            this.renderer404Page(request, response, error);
+            return;
+        }
+
+        var pageData = getPageCommonData(request);
+        pageData.message = error.message;
+        pageData.error = error;
+
+        response.status(error.status || 500);
+        response.render('error', pageData);
+    }
+};
+
+publicMethods.initRenderer();
+
+module.exports = publicMethods;

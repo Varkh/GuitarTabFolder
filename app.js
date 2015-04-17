@@ -1,4 +1,5 @@
 // - external libs
+var flash = require('express-flash')
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -19,6 +20,7 @@ var login = require('./routes/login');
 var config = require('./modules/config');
 var renderer = require('./modules/renderer');
 var logger = require('./modules/logger');
+var authenticator = require('./modules/authenticator');
 
 
 var app = express();
@@ -36,10 +38,13 @@ app.use(session({
     secret: config.getSessionSecret(),
     resave: false,
     saveUninitialized: false }));
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
+authenticator.initPassport();
 
+//- routes
 app.use('/', routes);
 app.use('/list', tabList);
 app.use('/tab', tabulatur);
@@ -60,7 +65,7 @@ app.use(function(req, res, next) {
 if (app.get('env') === 'development') {
     app.use(function(error, request, response, next) {
         logger.error(error);
-        renderer.renderErrorPage(response, error);
+        renderer.renderErrorPage(request, response, error);
     });
 }
 
@@ -68,7 +73,7 @@ if (app.get('env') === 'development') {
 // no stacktraces leaked to user
 app.use(function(error, request, response, next) {
     logger.error(error);
-    renderer.renderErrorPage(response, error);
+    renderer.renderErrorPage(request, response, error);
 });
 
 

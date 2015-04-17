@@ -7,13 +7,13 @@ block content
         alert(type="success", ng-show="isLogined")
             span.glyphicon.glyphicon-ok
             = pageText.loginPage.successMsg
-        form(name="loginForm" role="form", ng-submit="loginForm.$valid && submitLoginForm()", ng-hide="isSubmited" novalidate)
+        form(name="loginForm" role="form", ng-submit="loginForm.$valid && submitLoginForm()", ng-hide="isLogined" novalidate)
             div.form-group
                 label(for="loginInput")= pageText.loginPage.loginField
-                input.form-control#loginInput(type="text", placeholder= pageText.loginPage.loginHolder, ng-model="loginData.login")
+                input.form-control#loginInput(type="text", placeholder= pageText.loginPage.loginHolder, ng-model="loginData.username")
             div.form-group
                 label(for="passInput")= pageText.loginPage.passwordField
-                input.form-control#passInput(type="password", placeholder= pageText.loginPage.passwordHolder, ng-model="loginData.pass")
+                input.form-control#passInput(type="password", placeholder= pageText.loginPage.passwordHolder, ng-model="loginData.password")
             hr
             button.btn.btn-lg.btn-primary(type="submit")
                 span.glyphicon.glyphicon-user

@@ -6,7 +6,7 @@ var renderer = require('../modules/renderer');
 var logger = require('../modules/logger');
 
 router.get('/', function(request, response) {
-    renderer.renderFeedBackPage(response);
+    renderer.renderFeedBackPage(request, response);
 });
 
 router.post('/', function(request, response) {

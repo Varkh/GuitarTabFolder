@@ -1,7 +1,10 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var crypto = require('crypto');
+
 var config = require('../modules/config');
 var logger = require('../modules/logger');
+var helper = require('../modules/helper');
 
 mongoose.connect(config.getDbUrl());
 
@@ -31,8 +34,14 @@ var commentSchema = mongoose.Schema({
 });
 
 var userSchema = mongoose.Schema({
-
+    username: String,
+    email: String,
+    password: String
 });
+
+userSchema.methods.validPassword = function validPassword (password) {
+    return helper.getHash(password) === this.password;
+};
 
 var feedbackSchema = mongoose.Schema({
     text: String,
@@ -42,6 +51,7 @@ var feedbackSchema = mongoose.Schema({
 
 var Tab = mongoose.model('Tab', tabSchema);
 var Comment = mongoose.model('Comment', commentSchema);
+var User = mongoose.model('User', userSchema);
 var Feedback = mongoose.model('Feedback', feedbackSchema);
 
 function getTabModel() {
@@ -52,10 +62,15 @@ function getCommentModel() {
     return Comment;
 }
 
+function getUserModel() {
+    return User;
+}
+
 function getFeedbackModel() {
     return Feedback;
 }
 
 exports.getTabModel = getTabModel;
 exports.getCommentModel = getCommentModel;
+exports.getUserModel = getUserModel;
 exports.getFeedbackModel = getFeedbackModel;

@@ -1,6 +1,6 @@
 function showExeption(data) {
     //TODO
-    alert("Something goes wrong");
+    alert(data);
 }
 
 angular.module('tabApplication', ['ui.bootstrap'])

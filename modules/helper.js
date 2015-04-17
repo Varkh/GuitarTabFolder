@@ -1,12 +1,18 @@
+var crypto = require('crypto');
 
-function getCurentFormatedDate() {
-    //TODO get date on client and show wih angular filter | date
-    return new Date();
-}
+var publicMethods = {
+    getCurentFormatedDate: function() {
+        //TODO get date on client and show wih angular filter | date
+        return new Date();
+    },
 
-function generateUrlFromName(name) {
-    return name.split(' ').join('_').toLowerCase();//TODO find better way
-}
+    generateUrlFromName: function(name) {
+        return name.split(' ').join('_').toLowerCase();//TODO find better way
+    },
 
-exports.getCurentFormatedDate = getCurentFormatedDate;
-exports.generateUrlFromName = generateUrlFromName;
+    getHash: function(initString) {
+        return crypto.createHash('sha256').update(initString).digest('hex');
+    }
+};
+
+module.exports = publicMethods;

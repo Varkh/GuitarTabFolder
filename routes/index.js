@@ -13,7 +13,7 @@ router.get('/', function(request, response) {
 /* GET pages*/
 
 router.get('/about', function(request, response) {
-    renderer.renderAboutPage(response);
+    renderer.renderAboutPage(request, response);
 });
 
 /* API */
@@ -40,6 +40,11 @@ router.get('/search', function(request, response) {
             response.json("");
         }
     });
+});
+
+router.get('/logout', function(request, response) {
+    request.logout();
+    response.redirect('/');
 });
 
 module.exports = router;

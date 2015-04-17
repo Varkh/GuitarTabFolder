@@ -12,7 +12,7 @@ router.get('/', function(request, response, next) {
             next(err);
             return;
         }
-        renderer.renderListPage(response, tabs);
+        renderer.renderListPage(request, response, tabs);
     });
 });
 

@@ -18,7 +18,7 @@ router.get('/:name', function(request, response, next) {
             return;
         }
         if(tab) {
-            renderer.renderTabPage(response, tab);
+            renderer.renderTabPage(request, response, tab);
         } else {
             var err404 = new Error('');
             err404.status = 404;
@@ -29,7 +29,7 @@ router.get('/:name', function(request, response, next) {
 });
 
 router.get('/', function(request, response) {
-    renderer.renderAddTabPage(response);
+    renderer.renderAddTabPage(request, response);
 });
 
 router.get('/:name/edit', function(request, response, next) {
@@ -50,7 +50,7 @@ router.get('/:name/edit', function(request, response, next) {
                 info: tab.otherInfo.join('\n'),
                 body: tab.body.join('\n')
             };
-            renderer.renderEditTabPage(response, dataToSend);
+            renderer.renderEditTabPage(request, response, dataToSend);
         }
     });
 });
