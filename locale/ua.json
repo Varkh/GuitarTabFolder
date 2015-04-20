@@ -67,6 +67,18 @@
         "loginButtonText": "Увійти"
     },
 
+    "registrationPage": {
+        "title": "Зареєструватись",
+        "loginField": "Логін:",
+        "loginHolder": "логін",
+        "emailField": "E-mail:",
+        "emailHolder": "Ми не шлемо спам",
+        "passwordField": "Пароль:",
+        "passwordHolder": "пароль",
+        "passwordRepeatHolder": "повторіть пароль",
+        "registrationButtonText": "Зареєструватись"
+    },
+
     "errorMessages": {
         "text404": "На жаль такої сторінки не існує"
     }

@@ -1,5 +1,15 @@
 extends ./layout.jade
 
+mixin formInput(inputId, inputTitle, inputType, inputPlaceholder, inputModel, isInputRequired)
+    .form-group
+        label(for=inputId)
+            = inputTitle
+        input.form-control(id = inputId,
+            type = inputType,
+            placeholder = inputPlaceholder,
+            ng-model = inputModel,
+            required = isInputRequired)
+
 block content
     div(ng-controller="LoginFormController")
         h2= pageText.loginPage.title
@@ -7,17 +17,47 @@ block content
         alert(type="success", ng-show="isLogined")
             span.glyphicon.glyphicon-ok-circle
             = pageText.loginPage.successMsg
-        alert(type="danger" ng-show="failureLoginMessage")
+        alert(type="danger", ng-show="failureLoginMessage")
             span.glyphicon.glyphicon-ban-circle
             | {{failureLoginMessage}}
-        form(name="loginForm" role="form", ng-submit="loginForm.$valid && submitLoginForm()", ng-hide="isLogined" novalidate)
-            div.form-group
+        form(name="loginForm", role="form", ng-submit="loginForm.$valid && submitLoginForm()", ng-hide="isLogined", novalidate)
+            .form-group
                 label(for="loginInput")= pageText.loginPage.loginField
-                input.form-control#loginInput(type="text", placeholder= pageText.loginPage.loginHolder, ng-model="loginData.username" required)
-            div.form-group
+                input.form-control#loginInput(type="text", placeholder= pageText.loginPage.loginHolder, ng-model="loginData.username", required)
+            .form-group
                 label(for="passInput")= pageText.loginPage.passwordField
-                input.form-control#passInput(type="password", placeholder= pageText.loginPage.passwordHolder, ng-model="loginData.password" required)
+                input.form-control#passInput(type="password", placeholder= pageText.loginPage.passwordHolder, ng-model="loginData.password", required)
             hr
             button.btn.btn-lg.btn-primary(type="submit")
                 span.glyphicon.glyphicon-user
                 = pageText.loginPage.loginButtonText
+
+    hr
+    div(ng-controller="RegistrationFormController")
+        h2= pageText.registrationPage.title
+        hr
+        form(name="registrationForm", role="form", ng-submit="registrationForm.$valid && submitRegistrationForm()", novalidate)
+            +formInput('registrationLoginInput',
+                pageText.registrationPage.loginField,
+                "text",
+                pageText.registrationPage.loginHolder,
+                "registrationData.username",
+                "required")
+            +formInput('emailInput',
+                pageText.registrationPage.emailField,
+                "email",
+                pageText.registrationPage.emailHolder,
+                "registrationData.email",
+                "required")
+            .form-group
+                label(for="registrationPassInput")= pageText.registrationPage.passwordField
+                input.form-control#registrationPassInput(type="password",
+                    placeholder= pageText.registrationPage.passwordHolder,
+                    ng-model="registrationData.password", required)
+                input.form-control#registrationPassRepeatInput(type="password",
+                    placeholder= pageText.registrationPage.passwordRepeatHolder,
+                    ng-model="registrationData.passwordRepeat", required)
+            hr
+            button.btn.btn-lg.btn-primary(type="submit")
+                span.glyphicon.glyphicon-user
+                = pageText.registrationPage.registrationButtonText

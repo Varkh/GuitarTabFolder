@@ -136,4 +136,33 @@ angular.module('tabApplication', ['ui.bootstrap'])
             }
         }
     };
-});
+})
+.controller('RegistrationFormController', function ($scope, $http, $window) {
+    $scope.isLogined = false;
+    $scope.registrationData = {};
+    $scope.failureRegistrationMessage = null;
+
+    $scope.submitRegistrationForm = function() {
+        $scope.failureLoginMessage = null;
+        $http.post('/api/register', $scope.registrationData)
+            .success(function(data, status, headers, config) {
+                if(status == 201) {
+                    $scope.isLogined = true;
+                    $window.location.href = '/';
+                } else {
+                    if(data.message) {
+                        $scope.failureRegistrationMessage = data.message;
+                    } else {
+                        showExeption(data);
+                    }
+                }
+            })
+            .error(function(data, status, headers, config) {
+                if(data.message) {
+                    $scope.failureRegistrationMessage = data.message;
+                } else {
+                    showExeption(data);
+                }
+            });
+    };
+})
