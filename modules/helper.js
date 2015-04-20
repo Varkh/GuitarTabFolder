@@ -12,6 +12,10 @@ var publicMethods = {
 
     getHash: function(initString) {
         return crypto.createHash('sha256').update(initString).digest('hex');
+    },
+    wrapJsonError: function(response, error, status) {
+        if(!status) status = 500;
+        response.status(status).send(error);
     }
 };
 

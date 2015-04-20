@@ -1,0 +1,31 @@
+// mixin
+mixin space
+    |&nbsp
+
+mixin commentBody
+    h4.media-heading {{comment._author.username}}
+        +space
+        small {{comment.postedDate}}
+    | {{comment.text}}
+
+mixin comment
+    .media(ng-repeat='comment in comments')
+        a.pull-left(href='#')
+            img.media-object(src='http://placehold.it/64x64', alt='')
+        .media-body
+            +commentBody
+
+// Comments Form
+.well
+    h4= pageText.comment.leaveComment
+    - if(username)
+        form(name='commentForm', role='form', ng-submit="commentForm.$valid && submitCommentForm()", novalidate)
+            .form-group
+                textarea.form-control(name='text', rows='3', ng-model="newComment.text", required)
+            button.btn.btn-primary(type='submit')= pageText.comment.submit
+    - else
+        = pageText.comment.notAuthorizedMsg
+        +space
+        a(href='/login')= pageText.navLogin
+hr
++comment

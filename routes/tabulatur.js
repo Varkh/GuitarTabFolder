@@ -6,6 +6,7 @@ var helper = require('../modules/helper');
 var renderer = require('../modules/renderer');
 var logger = require('../modules/logger');
 var authenticator = require('../modules/authenticator');
+//TODO move to api
 
 router.param('name', function(request, response, next) {
     request.tabName = request.params.name.toLowerCase();
@@ -78,25 +79,6 @@ router.put('/:name/', authenticator.isOwner, function(request, response, next) {
         }
         response.json({url: '/tab/' + tab.tabId});
     });
-});
-
-
-router.post('/:name/comment', authenticator.isLoggedIn, function(request, response, next) {
-    var tabId = request.params.name.toLowerCase();
-    var newComment = request.body;
-    tabRequestHandler.addComment(
-        tabId,
-        request.user.username,
-        helper.getCurentFormatedDate(),
-        newComment.text,
-        function (err, tab) {
-            if(err) {
-                next(err);
-                return;
-            }
-            response.redirect(301, "/tab/"+tabId);
-        }
-    );
 });
 
 module.exports = router;

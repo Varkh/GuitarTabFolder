@@ -31,4 +31,7 @@ block content
         each line in tabData.body
             div.tab-line= line
     hr
-    include ./comments.jade
+    comments
+    //TODO remove to angular
+    script
+        != 'var tabId = ' + JSON.stringify(tabData.tabId) + ';'

@@ -66,7 +66,13 @@ var publicMethods = {
                 comment.save(callback);
             });
         });
-
+    },
+    getTabComments: function(tabId, callback) {
+        Tab.findOne({ tabId: tabId }, '_id', function (err, tab) {
+            Comment.find({_tab: tab._id})
+                .populate('_author', 'username')
+                .exec(callback);
+        });
     }
 };
 

@@ -13,8 +13,10 @@ var passport = require('passport');
 var routes = require('./routes/index');
 var tabList = require('./routes/tabList');
 var tabulatur = require('./routes/tabulatur');
+var tabulatureAPI = require('./routes/api/tabulature');
 var feedback = require('./routes/feedback');
 var login = require('./routes/login');
+var angularRouter = require('./routes/angularRouter');
 
 // - modules
 var config = require('./modules/config');
@@ -50,6 +52,8 @@ app.use('/list', tabList);
 app.use('/tab', tabulatur);
 app.use('/feedback', feedback);
 app.use('/login', login);
+app.use('/angular', angularRouter);
+app.use('/api/tab', tabulatureAPI);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

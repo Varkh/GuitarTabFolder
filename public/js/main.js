@@ -3,15 +3,17 @@ function showExeption(data) {
     alert(data);
 }
 
+var errorResponse = function(data, status, headers, config) {
+    showExeption(data);
+};
+
 angular.module('tabApplication', ['ui.bootstrap'])
 .controller('lastTabController', function ($scope, $http) {
     $http.get('/lastTabs')
         .success(function(data) {
             $scope.lastTabs = data;
         })
-        .error(function(data) {
-            console.log('Error: ' + data);
-        });
+        .error(errorResponse);
 })
 .controller('searchController', function ($scope, $http, $window) {
     $scope.showAlert = false;
@@ -48,10 +50,6 @@ angular.module('tabApplication', ['ui.bootstrap'])
                 showExeption(data);
             }
         };
-        var errorResponse = function(data, status, headers, config) {
-            showExeption(data);
-        };
-
         if(isEdit) {
             $http.put('/tab/' + tabDataClient.tabId, $scope.tab)
                 .success(successResponse)
@@ -76,36 +74,66 @@ angular.module('tabApplication', ['ui.bootstrap'])
                     showExeption();
                 }
             })
-            .error(function(data, status, headers, config) {
-                showExeption(data);
-            });
+            .error(errorResponse);
     };
 })
-.controller('LoginFormController', function ($scope, $http) {
-        $scope.isLogined = false;
-        $scope.loginData = {};
-        $scope.failureLoginMessage = null;
+.controller('LoginFormController', function ($scope, $http, $window) {
+    $scope.isLogined = false;
+    $scope.loginData = {};
+    $scope.failureLoginMessage = null;
 
-        $scope.submitLoginForm = function() {
-            $scope.failureLoginMessage = null;
-            $http.post('/login', $scope.loginData)
-                .success(function(data, status, headers, config) {
-                    if(status == 200) {
-                        $scope.isLogined = true;
-                    } else {
-                        if(data.message) {
-                            $scope.failureLoginMessage = data.message;
-                        } else {
-                            showExeption(data);
-                        }
-                    }
-                })
-                .error(function(data, status, headers, config) {
+    $scope.submitLoginForm = function() {
+        $scope.failureLoginMessage = null;
+        $http.post('/login', $scope.loginData)
+            .success(function(data, status, headers, config) {
+                if(status == 200) {
+                    $scope.isLogined = true;
+                    $window.location.href = '/';
+                } else {
                     if(data.message) {
                         $scope.failureLoginMessage = data.message;
                     } else {
                         showExeption(data);
                     }
-                });
-        };
-    });
+                }
+            })
+            .error(function(data, status, headers, config) {
+                if(data.message) {
+                    $scope.failureLoginMessage = data.message;
+                } else {
+                    showExeption(data);
+                }
+            });
+    };
+})
+.directive('comments', function () {
+    return {
+        restrict: 'E',
+        templateUrl: '/angular/templates/comments',
+        controller: function($scope, $http) {
+            $scope.comments = [];
+            $scope.newComment = {};
+
+            var tabName = tabId;//TODO find another way to get tabId
+            $http.get('/api/tab/' + tabName + '/comment')
+                .success(function(data) {
+                    $scope.comments = data;
+                })
+                .error(errorResponse);
+
+            $scope.submitCommentForm = function() {
+                $http.post('/api/tab/' + tabName + '/comment', $scope.newComment)
+                    .success(function(data, status, headers, config) {
+                        if(data.text) {
+                        $scope.comments.push(data)
+                        } else {
+                            showExeption(data);
+                        }
+                        $scope.newComment = {};
+                        $scope.commentForm.$setPristine();
+                    })
+                    .error(errorResponse);
+            }
+        }
+    };
+});

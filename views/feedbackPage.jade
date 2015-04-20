@@ -7,7 +7,7 @@ block content
         alert(type="success", ng-show="isSubmited")
             span.glyphicon.glyphicon-ok
             = pageText.feedbackPage.successMsg
-        form(name="feedbackForm" role="form", ng-submit="feedbackForm.$valid && submitFeedBackForm()", ng-hide="isSubmited" novalidate)
+        form(name="feedbackForm", role="form", ng-submit="feedbackForm.$valid && submitFeedBackForm()", ng-hide="isSubmited", novalidate)
             div.form-group
                 label(for="nameInput")= pageText.feedbackPage.nameField
                 input.form-control#nameInput(type="text", placeholder= pageText.feedbackPage.nameHolder, ng-model="feedbackMsg.name")
