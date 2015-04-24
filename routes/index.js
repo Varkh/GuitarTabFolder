@@ -42,6 +42,10 @@ router.get('/search', function(request, response) {
     });
 });
 
+router.get('/login', function(request, response) {
+    renderer.renderLoginPage(request, response);
+});
+
 router.get('/logout', function(request, response) {
     request.logout();
     response.redirect('/');

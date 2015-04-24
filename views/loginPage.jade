@@ -36,7 +36,10 @@ block content
     div(ng-controller="RegistrationFormController")
         h2= pageText.registrationPage.title
         hr
-        form(name="registrationForm", role="form", ng-submit="registrationForm.$valid && submitRegistrationForm()", novalidate)
+        alert(type="danger", ng-show="failureRegistrationMessage")
+            span.glyphicon.glyphicon-ban-circle
+            | {{failureRegistrationMessage}}
+        form(name="registrationForm", role="form", ng-submit="registrationForm.$valid && submitRegistrationForm()", ng-hide="isLogined", novalidate)
             +formInput('registrationLoginInput',
                 pageText.registrationPage.loginField,
                 "text",
@@ -53,10 +56,10 @@ block content
                 label(for="registrationPassInput")= pageText.registrationPage.passwordField
                 input.form-control#registrationPassInput(type="password",
                     placeholder= pageText.registrationPage.passwordHolder,
-                    ng-model="registrationData.password", required)
+                    ng-model="registrationData.password", ng-minlength="6", required)
                 input.form-control#registrationPassRepeatInput(type="password",
                     placeholder= pageText.registrationPage.passwordRepeatHolder,
-                    ng-model="registrationData.passwordRepeat", required)
+                    ng-model="registrationData.passwordRepeat", required, check-pass-match, password-one="{{registrationData.password}}")
             hr
             button.btn.btn-lg.btn-primary(type="submit")
                 span.glyphicon.glyphicon-user

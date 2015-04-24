@@ -84,7 +84,7 @@ angular.module('tabApplication', ['ui.bootstrap'])
 
     $scope.submitLoginForm = function() {
         $scope.failureLoginMessage = null;
-        $http.post('/login', $scope.loginData)
+        $http.post('/api/login', $scope.loginData)
             .success(function(data, status, headers, config) {
                 if(status == 200) {
                     $scope.isLogined = true;
@@ -150,19 +150,34 @@ angular.module('tabApplication', ['ui.bootstrap'])
                     $scope.isLogined = true;
                     $window.location.href = '/';
                 } else {
-                    if(data.message) {
-                        $scope.failureRegistrationMessage = data.message;
+                    if(data.err) {
+                        $scope.failureRegistrationMessage = data.err;
                     } else {
                         showExeption(data);
                     }
                 }
             })
             .error(function(data, status, headers, config) {
-                if(data.message) {
-                    $scope.failureRegistrationMessage = data.message;
+                if(data.err) {
+                    $scope.failureRegistrationMessage = data.err;
                 } else {
                     showExeption(data);
                 }
             });
     };
 })
+.directive('checkPassMatch', [function () {
+    return {
+        require: 'ngModel',
+        restrict: 'A',
+        scope: {
+            passwordOne: '@'
+        },
+        link: function(scope, elem, attr, ngModel) {
+            ngModel.$parsers.unshift(function (value) {
+                ngModel.$setValidity('pwCheck', value === scope.passwordOne);
+                return value;
+            });
+        }
+    }
+}]);

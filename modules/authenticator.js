@@ -43,13 +43,13 @@ var publicMethods = {
 //        });
     },
 
-    addNewUser: function(userData) {
+    addNewUser: function(userData, callback) {
         var newUser = new User({
             username: userData.username,
             email: userData.email,
             password: helper.getHash(userData.password)
         });
-        newUser.save();
+        newUser.save(callback);
     },
 
     isLoggedIn: function (request, response, next) {
