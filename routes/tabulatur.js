@@ -20,6 +20,7 @@ router.get('/:name', function(request, response, next) {
             return;
         }
         if(tab) {
+            tab.isOwner = authenticator.isOwner(request, tab._author._id);
             renderer.renderTabPage(request, response, tab);
         } else {
             var err404 = new Error('');
@@ -36,6 +37,10 @@ router.get('/', authenticator.isLoggedIn, function(request, response) {
 
 router.get('/:name/edit', function(request, response, next) {
     tabRequestHandler.getTab(request.tabName, function (err, tab) {
+        if(!authenticator.isOwner(request, tab._author._id)) {
+            helper.wrapJsonError(response, 403, "Forbidden");
+            return;
+        }
         if(err) {
             next(err);
             return;

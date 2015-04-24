@@ -46,6 +46,19 @@ var publicMethods = {
         Tab.findOneAndUpdate(id, update, callback);
     },
 
+    deleteTab: function(tabId, callback) {
+        Tab.findOne({ tabId: tabId })
+            .select('_id _author')
+            .exec(function (err, tab) {
+//            if(!authenticator.isOwner(request, tab._author._id)) {
+//                helper.wrapJsonError(response, 403, "Forbidden");
+//                return;
+//            }
+//
+//            Tab.findOne({ tabId: tabId }).remove(callback);
+        });
+    },
+
     getLastTabNames: function(callback) {
         Tab.find()
             .sort('-postedDate')

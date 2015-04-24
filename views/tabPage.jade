@@ -14,9 +14,10 @@ block content
         = pageText.tabPage.createDate
         +space
         = tabData.postedDate
-        a.btn.btn-primary.pull-right(href='/tab/' + tabData.tabId + '/edit')
-            span.glyphicon.glyphicon-pencil
-            | Edit
+        if(tabData.isOwner)
+            a.btn.btn-primary.pull-right(href='/tab/' + tabData.tabId + '/edit')
+                span.glyphicon.glyphicon-pencil
+                | Edit
     p
         = pageText.tabPage.author
         +space

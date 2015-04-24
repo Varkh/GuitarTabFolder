@@ -9,14 +9,19 @@ router.param('name', function(request, response, next) {
     request.tabName = request.params.name.toLowerCase();
     next();
 })
+.delete('/:name', function(request, response, next) {
+    tabRequestHandler.deleteTab(request.tabName, function() {
+        response.sendStatus(200);
+    });
+})
 .get('/:name/comment', function(request, response, next) {
-        tabRequestHandler.getTabComments(request.tabName, function (err, comments) {
-            if(err) {
-                helper.wrapJsonError(response, err);
-                return;
-            }
-            response.json(comments ? comments : []);
-        });
+    tabRequestHandler.getTabComments(request.tabName, function (err, comments) {
+        if(err) {
+            helper.wrapJsonError(response, err);
+            return;
+        }
+        response.json(comments ? comments : []);
+    });
 })
 .post('/:name/comment', authenticator.isLoggedIn, function(request, response, next) {
     var tabId = request.params.name.toLowerCase();

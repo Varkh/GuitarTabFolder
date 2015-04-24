@@ -59,12 +59,14 @@ var publicMethods = {
         return response.status(401).json('Unauthorized');
     },
 
-    isOwner: function (request, response, next) {
-        //TODO check isOwner
-        if (request.isAuthenticated())
-            return next();
-        logger.debug("Access denied, redirect");
-        return response.status(401).json('Unauthorized');
+    isOwner: function (request, userId, callback) {
+        var result = request.isAuthenticated() && userId && request.user.id == userId;
+        if (!callback) {
+            return result;
+        } else {
+            //TODO finish to use
+            return callback(result);
+        }
     }
 };
 
