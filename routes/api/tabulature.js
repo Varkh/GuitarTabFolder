@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var tabRequestHandler = require('../../handlers/tabRequestHandler');
-var authenticator = require('../../modules/authenticator')
+var authenticator = require('../../modules/authenticator');
 var helper = require('../../modules/helper');
 
 router.param('name', function(request, response, next) {
@@ -10,8 +10,12 @@ router.param('name', function(request, response, next) {
     next();
 })
 .delete('/:name', function(request, response, next) {
-    tabRequestHandler.deleteTab(request.tabName, function() {
-        response.sendStatus(200);
+    tabRequestHandler.deleteTab(request, function(err) {
+        if(!err) {
+            response.sendStatus(200);
+        } else {
+            helper.wrapJsonError(response, err.error ? err.error : "", err.status ? err.status : null);
+        }
     });
 })
 .get('/:name/comment', function(request, response, next) {

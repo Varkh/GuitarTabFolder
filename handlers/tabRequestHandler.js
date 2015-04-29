@@ -1,5 +1,7 @@
 var dbWorker = require('../modules/dbWorker');
 var helper = require('../modules/helper');
+var logger = require('../modules/logger');
+var authenticator = require('../modules/authenticator')
 
 var Tab = dbWorker.getTabModel();
 var Comment = dbWorker.getCommentModel();
@@ -46,16 +48,27 @@ var publicMethods = {
         Tab.findOneAndUpdate(id, update, callback);
     },
 
-    deleteTab: function(tabId, callback) {
+    deleteTab: function(request, callback) {
+        var tabId = request.tabName;
         Tab.findOne({ tabId: tabId })
             .select('_id _author')
             .exec(function (err, tab) {
-//            if(!authenticator.isOwner(request, tab._author._id)) {
-//                helper.wrapJsonError(response, 403, "Forbidden");
-//                return;
-//            }
-//
-//            Tab.findOne({ tabId: tabId }).remove(callback);
+                if(err) {
+                    callback(err);
+                    return;
+                }
+                if(!tab) {
+                    callback({'status': '404', 'error': 'Non found'});
+                    return;
+                }
+                if(!authenticator.isOwner(request, tab._author)) {
+                    callback({'status': '403', 'error': 'Forbidden'});
+                    return;
+                }
+                logger.debug("About to delete tab: " + tab.tabId);
+                Tab.findOne({ _id: tab._id }).remove(function () {
+                    Comment.find({_tab: tab._id}).remove(callback);
+                });
         });
     },
 
@@ -76,7 +89,10 @@ var publicMethods = {
                     postedDate: date,
                     text: text
                 });
-                comment.save(callback);
+                var opts = [ { path: '_author', select: 'username' } ];
+                comment.save(function(err, comment) {
+                    Comment.populate(comment, opts, callback);
+                });
             });
         });
     },

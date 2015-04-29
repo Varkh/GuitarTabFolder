@@ -9,15 +9,28 @@ block content
         = pageText.tabPage.dateColumn
         a(href='#')= tabData.band
     hr
+    if(tabData.isOwner)
+        .btn-group.pull-right(dropdown, is-open='status.isopen')
+            button.btn.btn-default.dropdown-toggle(type='button', dropdown-toggle)
+                i.glyphicon.glyphicon-cog
+                +space
+                span.caret
+            ul.dropdown-menu(role='menu')
+                li
+                    a(href='/tab/' + tabData.tabId + '/edit')
+                        span.glyphicon.glyphicon-pencil
+                        +space
+                        | Edit
+                li
+                    a(ng-controller='DeleteTabController', ng-click='deleteClick()')
+                        span.glyphicon.glyphicon-remove
+                        +space
+                        | Delete
     p
         span.glyphicon.glyphicon-time
         = pageText.tabPage.createDate
         +space
         = tabData.postedDate
-        if(tabData.isOwner)
-            a.btn.btn-primary.pull-right(href='/tab/' + tabData.tabId + '/edit')
-                span.glyphicon.glyphicon-pencil
-                | Edit
     p
         = pageText.tabPage.author
         +space

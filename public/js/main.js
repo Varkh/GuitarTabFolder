@@ -175,9 +175,20 @@ angular.module('tabApplication', ['ui.bootstrap'])
         },
         link: function(scope, elem, attr, ngModel) {
             ngModel.$parsers.unshift(function (value) {
-                ngModel.$setValidity('pwCheck', value === scope.passwordOne);
+                ngModel.$setValidity('checkPassMatch', value === scope.passwordOne);
                 return value;
             });
         }
     }
-}]);
+}])
+.controller('DeleteTabController', function ($scope, $http, $window) {
+    var tabName = tabId;
+
+    $scope.deleteClick = function() {
+        $http.delete('/api/tab/' + tabName)
+            .success(function(data, status) {
+                $window.location.href = '/';
+            })
+            .error(errorResponse);
+    }
+});
