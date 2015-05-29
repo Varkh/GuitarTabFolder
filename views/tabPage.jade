@@ -30,7 +30,7 @@ block content
         span.glyphicon.glyphicon-time
         = pageText.tabPage.createDate
         +space
-        = tabData.postedDate
+        = '{{"' + tabData.postedDate.getMilliseconds() + '" | date:"dd.MM.yyyy HH:mm:ss" }}'
     p
         = pageText.tabPage.author
         +space

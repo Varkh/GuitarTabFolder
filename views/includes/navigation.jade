@@ -21,10 +21,12 @@ nav.navbar.navbar-default.navbar-custom.navbar-fixed-top
                 li
                     a(href='/feedback')= pageText.navFeedback
                 - if(username)
-                    li
-                        a(href='#')= username
-                    li
-                        a(href='/logout')= pageText.navLogout
+                    li(dropdown)
+                        a(href='#', dropdown-toggle)= username
+                            span.caret
+                        ul.dropdown-menu(role="menu")
+                            li
+                                a(href='/logout')= pageText.navLogout
                 - else
                     li
                         a(href='/login')= pageText.navLogin

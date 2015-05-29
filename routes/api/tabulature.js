@@ -43,6 +43,15 @@ router.param('name', function(request, response, next) {
             response.status(201).json(comment);
         }
     );
+})
+.get('/', function(request, response, next) {
+    tabRequestHandler.getTabs(function (err, tabs) {//TODO: get tab header, not the whole tab
+        if(err) {
+            helper.wrapJsonError(response, err);
+            return;
+        }
+        response.status(201).json(tabs);
+    });
 });
 
 module.exports = router;

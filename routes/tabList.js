@@ -4,7 +4,7 @@ var router = express.Router();
 var tabRequestHandler = require('../handlers/tabRequestHandler');
 var renderer = require('../modules/renderer');
 
-//TODO rewrite according to REST
+//TODO remove
 /* GET list page. */
 router.get('/', function(request, response, next) {
     tabRequestHandler.getTabs(function (err, tabs) {

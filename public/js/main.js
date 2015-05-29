@@ -7,7 +7,7 @@ var errorResponse = function(data, status, headers, config) {
     showExeption(data);
 };
 
-angular.module('tabApplication', ['ui.bootstrap'])
+angular.module('tabApplication', ['ui.bootstrap', 'ngTable'])
 .controller('lastTabController', function ($scope, $http) {
     $http.get('/lastTabs')
         .success(function(data) {
@@ -191,4 +191,22 @@ angular.module('tabApplication', ['ui.bootstrap'])
             })
             .error(errorResponse);
     }
+})
+.controller('TabListController', function ($scope, $http, $window, ngTableParams) {
+    var tabHeaders = [];
+    $http.get('/api/tab')
+        .success(function(data) {
+            tabHeaders = data;
+
+            $scope.tableParams = new ngTableParams({
+                page: 1,            // show first page
+                count: 10           // count per page
+            }, {
+                total: tabHeaders.length, // length of data
+                getData: function ($defer, params) {
+                    $defer.resolve(tabHeaders.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+                }
+            })
+        })
+        .error(errorResponse);
 });

@@ -1,16 +1,19 @@
 extends ./layout.jade
 
 block content
-    table.row-border.hover.table
-        thead
-            tr
-                th= pageText.listPage.bandColumn
-                th= pageText.listPage.nameColumn
-                th= pageText.listPage.dateColumn
-        tbody
-            each tab in tabsData
-                tr
-                    td= tab.band
-                    td
-                        a(href='/tab/'+tab.tabId)= tab.title
-                    td= tab.postedDate
+    div(ng-controller='TabListController')
+        p
+            strong Page:
+            | {{tableParams.page()}}
+        p
+            strong Count per page:
+            | {{tableParams.count()}}
+        table.table(ng-table='tableParams')
+            tr(ng-repeat='tabHead in $data')
+                td(data-title= '"' + pageText.listPage.bandColumn + '"')
+                    | {{tabHead.band}}
+                td(data-title= '"' + pageText.listPage.nameColumn + '"')
+                    a(href="tab/{{tabHead.tabId}}")
+                        | {{tabHead.title}}
+                td(data-title= '"' + pageText.listPage.dateColumn + '"')
+                    | {{tabHead.postedDate | date:"dd.MM.yyyy HH:mm:ss"}}
