@@ -29,6 +29,7 @@
         "saveButtonText": "Зберегти"
     },
     "listPage": {
+        "title": "Список табулатур",
         "bandColumn": "Група",
         "nameColumn": "Назва пісні",
         "dateColumn": "Дата"

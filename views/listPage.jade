@@ -1,19 +1,14 @@
 extends ./layout.jade
 
 block content
+    h1= pageText.listPage.title
     div(ng-controller='TabListController')
-        p
-            strong Page:
-            | {{tableParams.page()}}
-        p
-            strong Count per page:
-            | {{tableParams.count()}}
-        table.table(ng-table='tableParams')
+        table.table(ng-table='tableParams', show-filter='true')
             tr(ng-repeat='tabHead in $data')
-                td(data-title= '"' + pageText.listPage.bandColumn + '"')
+                td(data-title= '"' + pageText.listPage.bandColumn + '"', filter="{ 'band': 'text' }", sortable="'band'")
                     | {{tabHead.band}}
-                td(data-title= '"' + pageText.listPage.nameColumn + '"')
+                td(data-title= '"' + pageText.listPage.nameColumn + '"', filter="{ 'title': 'text' }", sortable="'title'")
                     a(href="tab/{{tabHead.tabId}}")
                         | {{tabHead.title}}
-                td(data-title= '"' + pageText.listPage.dateColumn + '"')
+                td(data-title= '"' + pageText.listPage.dateColumn + '"', sortable="'postedDate'")
                     | {{tabHead.postedDate | date:"dd.MM.yyyy HH:mm:ss"}}

@@ -192,7 +192,7 @@ angular.module('tabApplication', ['ui.bootstrap', 'ngTable'])
             .error(errorResponse);
     }
 })
-.controller('TabListController', function ($scope, $http, $window, ngTableParams) {
+.controller('TabListController', function ($scope, $http, $window, $filter, ngTableParams) {
     var tabHeaders = [];
     $http.get('/api/tab')
         .success(function(data) {
@@ -200,13 +200,22 @@ angular.module('tabApplication', ['ui.bootstrap', 'ngTable'])
 
             $scope.tableParams = new ngTableParams({
                 page: 1,            // show first page
-                count: 10           // count per page
+                count: 10,           // count per page
+                filter: {}
             }, {
                 total: tabHeaders.length, // length of data
                 getData: function ($defer, params) {
-                    $defer.resolve(tabHeaders.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+                    var orderedData = params.filter() ?
+                        $filter('filter')(tabHeaders, params.filter()) :
+                        tabHeaders;
+                    orderedData = params.sorting() ?
+                        $filter('orderBy')(orderedData, params.orderBy()) :
+                        data;
+                    $scope.tabs = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                    params.total(orderedData.length); // set total for recalc pagination
+                    $defer.resolve($scope.tabs);
                 }
             })
-        })
-        .error(errorResponse);
+    })
+    .error(errorResponse);
 });
