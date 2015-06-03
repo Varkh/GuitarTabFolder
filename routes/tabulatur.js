@@ -62,28 +62,4 @@ router.get('/:name/edit', function(request, response, next) {
     });
 });
 
-/* API */
-router.post('/', authenticator.isLoggedIn, function(request, response, next) {
-    var tabData = request.body;
-    tabData.username = request.user.username;
-    tabRequestHandler.addTab(tabData, function (err, tab) {
-        if(err) {
-            next(err);
-            return;
-        }
-        logger.debug("New tab created: " + tab.tabId);
-        response.json({url: '/tab/' + tab.tabId});
-    });
-});
-
-router.put('/:name/', authenticator.isOwner, function(request, response, next) {
-    tabRequestHandler.editTab(request.tabName, request.body, function (err, tab) {
-        if(err) {
-            next(err);
-            return;
-        }
-        response.json({url: '/tab/' + tab.tabId});
-    });
-});
-
 module.exports = router;

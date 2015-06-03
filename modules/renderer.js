@@ -59,6 +59,9 @@ var publicMethods = {
     renderCommentsTemplate: function(request, response) {
         response.render('templates/comments', getPageCommonData(request));
     },
+    renderErrorMessageTemplate: function(request, response) {
+        response.render('templates/errorMessageTemplate');
+    },
 
     renderErrorPage: function(request, response, error) {
         if(error.status == 404) {

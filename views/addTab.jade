@@ -8,6 +8,7 @@ block content
             h2= pageText.addTabPage.titleFieldForEdit
         else
             h2= pageText.addTabPage.titleField
+        error-message(message-text="{{errorMessageText}}")
         form(name="tabForm" role="form", ng-submit="tabForm.$valid && submitTabForm()" novalidate)
             div.form-group
                 label(for="nameInput")= pageText.addTabPage.nameField

@@ -43,6 +43,7 @@ angular.module('tabApplication', ['ui.bootstrap', 'ngTable'])
     }
 
     $scope.submitTabForm = function() {
+        $scope.errorMessageText = "";
         var successResponse = function(data, status, headers, config) {
             if (data && data.url) {
                 $window.location.href = data.url;
@@ -50,14 +51,22 @@ angular.module('tabApplication', ['ui.bootstrap', 'ngTable'])
                 showExeption(data);
             }
         };
+        var errorResponseJSON = function($scope, data) {
+            $scope.errorMessageText = data;
+        };
+
         if(isEdit) {
-            $http.put('/tab/' + tabDataClient.tabId, $scope.tab)
+            $http.put('/api/tab/' + tabDataClient.tabId, $scope.tab)
                 .success(successResponse)
-                .error(errorResponse);
+                .error(function(data) {
+                    errorResponseJSON($scope, data);
+                });
         } else {
-            $http.post('/tab', $scope.tab)
+            $http.post('/api/tab', $scope.tab)
                 .success(successResponse)
-                .error(errorResponse);
+                .error(function(data) {
+                    errorResponseJSON($scope, data);
+                });
         }
     }
 })
@@ -136,6 +145,17 @@ angular.module('tabApplication', ['ui.bootstrap', 'ngTable'])
             }
         }
     };
+})
+.directive('errorMessage', function() {
+    return {
+        restrict: 'E',
+        templateUrl: '/angular/templates/errorMessage',
+        scope: {
+            messageText: '@'
+        },
+        link: function (scope, element, attrs) {
+        }
+    }
 })
 .controller('RegistrationFormController', function ($scope, $http, $window) {
     $scope.isLogined = false;

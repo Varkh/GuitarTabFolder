@@ -4,10 +4,32 @@ var router = express.Router();
 var tabRequestHandler = require('../../handlers/tabRequestHandler');
 var authenticator = require('../../modules/authenticator');
 var helper = require('../../modules/helper');
+var logger = require('../../modules/logger');
 
 router.param('name', function(request, response, next) {
     request.tabName = request.params.name.toLowerCase();
     next();
+})
+.post('/', authenticator.isLoggedIn, function(request, response, next) {
+    var tabData = request.body;
+    tabData.username = request.user.username;
+    tabRequestHandler.addTab(tabData, function (err, tab) {
+        if(err) {
+            helper.wrapJsonError(response, err);
+            return;
+        }
+        logger.debug("New tab created: " + tab.tabId);
+        response.json({url: '/tab/' + tab.tabId});
+    });
+})
+.put('/:name/', authenticator.isOwner, function(request, response, next) {
+    tabRequestHandler.editTab(request.tabName, request.body, function (err, tab) {
+        if(err) {
+            helper.wrapJsonError(response, err);
+            return;
+        }
+        response.json({url: '/tab/' + tab.tabId});
+    });
 })
 .delete('/:name', function(request, response, next) {
     tabRequestHandler.deleteTab(request, function(err) {
