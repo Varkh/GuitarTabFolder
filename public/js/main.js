@@ -157,6 +157,16 @@ angular.module('tabApplication', ['ui.bootstrap', 'ngTable'])
         }
     }
 })
+.directive('formatedDate', function() {
+    return {
+        restrict: 'E',
+        template: '{{ formated | date:"dd.MM.yyyy HH:mm:ss" }}',
+        scope: {},
+        link: function (scope, element, attrs) {
+            scope.formated = Date.parse(attrs.date);
+        }
+    }
+})
 .controller('RegistrationFormController', function ($scope, $http, $window) {
     $scope.isLogined = false;
     $scope.registrationData = {};

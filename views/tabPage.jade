@@ -30,7 +30,7 @@ block content
         span.glyphicon.glyphicon-time
         = pageText.tabPage.createDate
         +space
-        = '{{"' + tabData.postedDate.getMilliseconds() + '" | date:"dd.MM.yyyy HH:mm:ss" }}'
+        formated-date(date= tabData.postedDate)
     p
         = pageText.tabPage.author
         +space
@@ -49,3 +49,4 @@ block content
     //TODO remove to angular
     script
         != 'var tabId = ' + JSON.stringify(tabData.tabId) + ';'
+        != 'var postedDate = ' + JSON.stringify(tabData.postedDate) + ';'

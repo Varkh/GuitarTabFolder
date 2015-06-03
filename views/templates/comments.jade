@@ -5,7 +5,7 @@ mixin space
 mixin commentBody
     h4.media-heading {{comment._author.username}}
         +space
-        small {{comment.postedDate}}
+        small {{comment.postedDate | date:"dd.MM.yyyy HH:mm:ss" }}
     | {{comment.text}}
 
 mixin comment
