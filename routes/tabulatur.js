@@ -9,7 +9,7 @@ var authenticator = require('../modules/authenticator');
 //TODO move to api
 
 router.param('name', function(request, response, next) {
-    request.tabName = request.params.name.toLowerCase();
+    request.tabName = encodeURIComponent(request.params.name.toLowerCase());
     next();
 });
 

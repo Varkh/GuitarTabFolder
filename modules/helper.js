@@ -7,7 +7,8 @@ var publicMethods = {
     },
 
     generateUrlFromName: function(name) {
-        return name.split(' ').join('_').toLowerCase();//TODO find better way
+        var preName = name.split(' ').join('_').toLowerCase();
+        return encodeURIComponent(preName);
     },
 
     getHash: function(initString) {

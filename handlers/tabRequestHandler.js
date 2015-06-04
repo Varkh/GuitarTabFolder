@@ -98,6 +98,10 @@ var publicMethods = {
     },
     getTabComments: function(tabId, callback) {
         Tab.findOne({ tabId: tabId }, '_id', function (err, tab) {
+            if(!tab) {
+                callback();
+                return;
+            }
             Comment.find({_tab: tab._id})
                 .populate('_author', 'username')
                 .exec(callback);

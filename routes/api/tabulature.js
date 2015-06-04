@@ -7,7 +7,7 @@ var helper = require('../../modules/helper');
 var logger = require('../../modules/logger');
 
 router.param('name', function(request, response, next) {
-    request.tabName = request.params.name.toLowerCase();
+    request.tabName = encodeURIComponent(request.params.name.toLowerCase());
     next();
 })
 .post('/', authenticator.isLoggedIn, function(request, response, next) {
@@ -50,7 +50,7 @@ router.param('name', function(request, response, next) {
     });
 })
 .post('/:name/comment', authenticator.isLoggedIn, function(request, response, next) {
-    var tabId = request.params.name.toLowerCase();
+    var tabId = request.tabName;
     var newComment = request.body;
     tabRequestHandler.addComment(
         tabId,
