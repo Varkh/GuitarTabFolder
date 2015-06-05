@@ -1,5 +1,6 @@
 {
     "title": "Guitar Tab Folder",
+    "footerFoundABug": "Знайшли помилку?",
 
     "headTitle": "GuitarTabFolder",
     "navCreate": "Строворити",
@@ -78,6 +79,14 @@
         "passwordHolder": "пароль",
         "passwordRepeatHolder": "повторіть пароль",
         "registrationButtonText": "Зареєструватись"
+    },
+
+    "aboutPage": {
+        "slogan": "Твій персональний збірник табулатур",
+        "lineSearch": "Пошук",
+        "lineSearchText": "Ми намагались створити швидкий та зручний спосіб пошуку табулатур",
+        "lineRegister": "Зареєструйся",
+        "lineRegisterText": "Отримай доступ по персонального збірника табулатур(знаходиться в стадії розробки)"
     },
 
     "errorMessages": {

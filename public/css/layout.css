@@ -10,6 +10,10 @@ footer {
     margin: 50px 0;
 }
 
+.noPadding {
+    padding-top: 0;
+}
+
 .tabContainer {
     font-family: monospace;
 }

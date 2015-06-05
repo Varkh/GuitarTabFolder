@@ -1,28 +1,28 @@
-//TODO read from file
-var fs = require('fs');
-
-var configFileURL = '../config.json';
-var data = function() {
-    return JSON.parse(fs.readFileSync(fileURL, 'utf8'));
+var configData = {
+    dbName: "test",
+    dbLocation: "mongodb://localhost/",
+    logLevel: "DEBUG",
+    logFile: "./log.txt",
+    sessionSecret: "secret"
 };
 
-function getDbUrl() {
-    return 'mongodb://localhost/test';
+function getDbName() {
+    return configData.dbName;
 }
 
-function getLogLevel() {
-    return 'DEBUG';
-}
+var publicMethods = {
+    getDbUrl: function() {
+        return configData.dbLocation + getDbName();
+    },
+    getLogLevel: function() {
+        return configData.logLevel;
+    },
+    getLogFilePath: function() {
+        return configData.logFile;
+    },
+    getSessionSecret: function() {
+        return configData.sessionSecret;
+    }
+};
 
-function getLogFilePath() {
-    return './log.txt';
-}
-
-function getSessionSecret() {
-    return 'secret';
-}
-
-exports.getDbUrl = getDbUrl;
-exports.getLogLevel = getLogLevel;
-exports.getLogFilePath = getLogFilePath;
-exports.getSessionSecret = getSessionSecret;
+module.exports = publicMethods;

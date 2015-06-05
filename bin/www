@@ -14,7 +14,7 @@ var logger = require('../modules/logger');
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.argv.PORT || '3000');//TODO get data from argv
 app.set('port', port);
 
 /**

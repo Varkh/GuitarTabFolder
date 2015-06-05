@@ -1,7 +1,7 @@
 doctype html
 html(ng-app='tabApplication')
     include  ./includes/head.jade
-    body
+    body.noPadding
         include ./includes/navigation.jade
         // Page Header
         header.intro-header(style="background-image: url('/img/guitar.jpg')")
@@ -11,13 +11,20 @@ html(ng-app='tabApplication')
                         .page-heading
                             h1 Guitar Tab Folder
                             hr.small
-                            h3 Your personal guitar tab collection
+                            h3= pageText.aboutPage.slogan
         .container
             .row
                 .col-lg-8.col-lg-offset-2.col-md-10.col-md-offset-1
-                    p Some good info should be here...
-                    .row.control-group
-                        .col-xs-12.controls
-                            | Thanks
+                    h1
+                    .well
+                        h4
+                            a(href='/list')= pageText.aboutPage.lineSearch
+                        p= pageText.aboutPage.lineSearchText
+                    .well
+                        h4
+                            a(href='/login')= pageText.aboutPage.lineRegister
+                        p= pageText.aboutPage.lineRegisterText
+
+
 
         include ./includes/footer.jade
